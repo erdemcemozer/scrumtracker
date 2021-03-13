@@ -1,8 +1,8 @@
+package com.example.scrumtracker;
+
 /*
  * @author erdemcemozer
  */
-
-package com.example.scrumtracker;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
