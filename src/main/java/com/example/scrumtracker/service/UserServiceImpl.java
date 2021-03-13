@@ -18,6 +18,5 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void createUser(Users user) {
 		userMongoDao.save(user);
-		System.out.println("test user service impl"); // TODO delete these later
 	}
 }

@@ -29,7 +29,6 @@ public class UserController {
 		System.out.println("Testt");
 		if (!ObjectUtils.isEmpty(user)) {
 			userService.createUser(user);
-			System.out.println("test user controller"); // TODO delete these later
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
