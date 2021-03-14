@@ -1,6 +1,6 @@
-# scrumtracker
+# scrumtracker backend
 
-Komple baştan yazıyoruz, hadi bakalım.
+Bitirme projemiz hayırlı uğurlu olsun :D
 
 ## Proje Detayları
 
