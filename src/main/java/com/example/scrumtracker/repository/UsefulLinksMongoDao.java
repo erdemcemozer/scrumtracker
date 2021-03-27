@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface UsefulLinksMongoDao extends MongoRepository<UsefulLinks, Integer> {
+public interface UsefulLinksMongoDao extends MongoRepository<UsefulLinks, String> {
 }

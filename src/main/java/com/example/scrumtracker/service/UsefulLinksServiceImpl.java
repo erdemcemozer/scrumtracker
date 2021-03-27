@@ -24,7 +24,13 @@ public class UsefulLinksServiceImpl implements UsefulLinksService {
 	}
 
 	@Override
-	public void  addNewLink(UsefulLinks usefulLinks){
+	public void addNewLink(UsefulLinks usefulLinks) {
 		usefulLinksMongoDao.save(usefulLinks);
+	}
+
+	@Override
+	public boolean deleteById(String linkId) {
+		usefulLinksMongoDao.deleteById(linkId);
+		return true;
 	}
 }
