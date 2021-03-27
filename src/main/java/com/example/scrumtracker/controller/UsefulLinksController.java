@@ -17,7 +17,7 @@ import java.util.List;
  * @author erdemcemozer
  */
 
-@RequestMapping
+@RequestMapping("usefulLinks")
 @RestController
 public class UsefulLinksController {
 
@@ -28,6 +28,7 @@ public class UsefulLinksController {
 	public ResponseEntity<List<UsefulLinks>> listAll() {
 
 		List<UsefulLinks> linksList = usefulLinksService.getAll();
+		System.out.println("Logger : List all links!");
 		return new ResponseEntity<>(linksList, HttpStatus.OK);
 	}
 
@@ -36,9 +37,23 @@ public class UsefulLinksController {
 
 		if (!ObjectUtils.isEmpty(usefulLinks)) {
 			usefulLinksService.addNewLink(usefulLinks);
+			System.out.println("Logger : Added a link!");
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value = "/deleteById", method = RequestMethod.POST)
+	public ResponseEntity<Object> deleteLink(@RequestBody UsefulLinks usefulLinks) {
+
+		String linkId = usefulLinks.getId();
+		if (linkId == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			boolean isDeleted = usefulLinksService.deleteById(linkId);
+			System.out.println("Logger : Deleted a link!");
+			return new ResponseEntity<>(isDeleted, HttpStatus.OK);
 		}
 	}
 }

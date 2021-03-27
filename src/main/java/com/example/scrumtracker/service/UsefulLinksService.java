@@ -14,4 +14,6 @@ public interface UsefulLinksService {
 
 	public void addNewLink(UsefulLinks usefulLinks);
 
+	public boolean deleteById(String linkId);
+
 }
