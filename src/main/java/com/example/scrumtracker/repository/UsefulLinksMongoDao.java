@@ -1,15 +1,13 @@
 package com.example.scrumtracker.repository;
 
-import com.example.scrumtracker.model.Users;
+import com.example.scrumtracker.model.UsefulLinks;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author erdemcemozer
- *
- * We need to check for Mongo's functions
  */
 
 @Repository
-public interface UserMongoDao extends MongoRepository<Users, Integer> {
+public interface UsefulLinksMongoDao extends MongoRepository<UsefulLinks, Integer> {
 }
