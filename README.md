@@ -13,3 +13,5 @@ Trello linki : https://trello.com/b/ddcUpIx0/ara%C5%9Ft%C4%B1rma-problemleri
 - java 15 kullanıyoruz, gradle ayarlarından "gradle jvm" için 15 seçilecek, File - Project Structure kısmına gelip Project SDK için de java 15 seçilmeli.
 
 - openjdk-15 intellij ile birlikte indirilebiliyor, rahat bir şekilde import edilebilir.
+
+- vue.js için yine plugini indirilmeli.
