@@ -47,6 +47,11 @@ public class UsefulLinksController {
 	@RequestMapping(value = "/deleteById", method = RequestMethod.POST)
 	public ResponseEntity<Object> deleteLink(@RequestBody UsefulLinks usefulLinks) {
 
+		/*
+		* TODO
+		*  We need to look for deleting an item from databas, mongo uses objectId not string for _id
+		* */
+
 		String linkId = usefulLinks.getId();
 		if (linkId == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
