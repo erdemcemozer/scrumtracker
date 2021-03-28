@@ -2,6 +2,8 @@
 
 Bitirme projemiz hayırlı uğurlu olsun :D
 
+Trello linki : https://trello.com/b/ddcUpIx0/ara%C5%9Ft%C4%B1rma-problemleri
+
 ## Proje Detayları
 
 - git pull ile projeyi çekebiliriz.
