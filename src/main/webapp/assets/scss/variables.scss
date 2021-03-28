@@ -1,0 +1,11 @@
+.v-application {
+    &.theme--light {
+        background-color: var(--v-light-base);
+    }
+
+    @for $i from 1 through 16 {
+        .elevation-#{$i} {
+            box-shadow: 0 0 #{$i * 4}px 0 rgba(0, 0, 0, 0.2) !important;
+        }
+    }
+}
