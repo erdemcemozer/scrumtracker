@@ -23,6 +23,8 @@ public class UserController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ResponseEntity<Users> createUser(@RequestBody Users user) {
 
+		user.setId("123"); // just for test, but we need to change id's to string
+
 		System.out.println("Testt");
 		if (!ObjectUtils.isEmpty(user)) {
 			userService.createUser(user);
