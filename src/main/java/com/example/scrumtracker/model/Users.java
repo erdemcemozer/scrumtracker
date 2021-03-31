@@ -21,5 +21,6 @@ public class Users {
 	String username;
 	String password;
 	// more user info will be added
+	// date of birth, email maybe?
 
 }

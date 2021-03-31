@@ -8,4 +8,8 @@ import com.example.scrumtracker.model.Users;
 public interface UserService {
 
 	public void createUser(Users user);
+
+	public void updateUser(Users user, String newUsername, String newPassword);
+
+	public void deleteUser(Users user, String userId);
 }
