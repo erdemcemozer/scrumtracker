@@ -3,9 +3,7 @@ package com.example.scrumtracker.service;
 import com.example.scrumtracker.model.Users;
 import com.example.scrumtracker.repository.UserMongoDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author erdemcemozer
@@ -23,12 +21,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(Users user, String newUsername, String newPassword) {
+	public void updateUser(Users user) {
 
 		if (userMongoDao.existsById(user.getId())) {
 			// Setting new username and password
-			user.setUsername(newUsername);
-			user.setPassword(newPassword);
+			user.setUsername(user.getUsername());
+			user.setPassword(user.getPassword());
+			user.setEmail(user.getEmail());
+			user.setTeam(user.getTeam());
 
 			userMongoDao.save(user);
 		} else {
@@ -38,11 +38,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(Users user, String id) {
+	public void deleteUser(Users user) {
 
 		if (userMongoDao.existsById(user.getId())) {
 			// Deleting user by id
-			userMongoDao.deleteById(id);
+			userMongoDao.deleteById(user.getId());
 		} else {
 			System.out.println("Bu eleman burada yok.");
 		}

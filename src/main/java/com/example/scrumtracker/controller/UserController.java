@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 /**
  * @author erdemcemozer
  */
@@ -23,7 +25,9 @@ public class UserController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ResponseEntity<Users> createUser(@RequestBody Users user) {
 
-		user.setId("123"); // just for test, but we need to change id's to string
+		UUID uuid = UUID.randomUUID();
+		String id = uuid.toString();
+		user.setId(id);
 
 		System.out.println("Testt");
 		if (!ObjectUtils.isEmpty(user)) {
@@ -43,7 +47,7 @@ public class UserController {
 
 		System.out.println("Updateeee");
 		if (!ObjectUtils.isEmpty(user)) {
-			userService.updateUser(user, user.getUsername(), user.getPassword());
+			userService.updateUser(user);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -51,14 +55,12 @@ public class UserController {
 
 	}
 
-	// Giving id and user parameters at the same time looks kinda unnecessary. Will
-	// discuss it later.
 	@RequestMapping(value = "/deleteUser" , method = RequestMethod.POST)
 	public ResponseEntity<Users> deleteUser(@RequestBody Users user) {
 
 		System.out.println("DLT");
 		if (!ObjectUtils.isEmpty(user)) {
-			userService.deleteUser(user, user.getId());
+			userService.deleteUser(user);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

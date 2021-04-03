@@ -20,6 +20,8 @@ public class Users {
 	String id;
 	String username;
 	String password;
+	String email;
+	String team;
 	// more user info will be added
 	// date of birth, email maybe?
 

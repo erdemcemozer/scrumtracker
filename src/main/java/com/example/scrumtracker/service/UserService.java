@@ -9,7 +9,7 @@ public interface UserService {
 
 	public void createUser(Users user);
 
-	public void updateUser(Users user, String newUsername, String newPassword);
+	public void updateUser(Users user);
 
-	public void deleteUser(Users user, String userId);
+	public void deleteUser(Users user);
 }
