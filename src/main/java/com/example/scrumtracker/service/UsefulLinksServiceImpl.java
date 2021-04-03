@@ -19,8 +19,7 @@ public class UsefulLinksServiceImpl implements UsefulLinksService {
 
 	@Override
 	public List<UsefulLinks> getAll() {
-		usefulLinksMongoDao.findAll();
-		return null;
+		return usefulLinksMongoDao.findAll();
 	}
 
 	@Override
