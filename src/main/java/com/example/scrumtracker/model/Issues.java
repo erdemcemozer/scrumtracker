@@ -16,9 +16,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ToString
 public class Issues {
 
-    @Id
-    String id;
-    String issueTitle;
-    String issueDesc;
-    String issueType;
+	@Id
+	String id;
+	String issueTitle;
+	String issueDesc;
+	String issueType;
 }
