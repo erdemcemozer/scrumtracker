@@ -29,7 +29,7 @@ public class UserController {
 		String id = uuid.toString();
 		user.setId(id);
 
-		System.out.println("Testt");
+		System.out.println("Logger : User controller create.");
 		if (!ObjectUtils.isEmpty(user)) {
 			userService.createUser(user);
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -45,7 +45,7 @@ public class UserController {
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public ResponseEntity<Users> updateUser(@RequestBody Users user) {
 
-		System.out.println("Updateeee");
+		System.out.println("Logger : User controller update.");
 		if (!ObjectUtils.isEmpty(user)) {
 			userService.updateUser(user);
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -58,7 +58,7 @@ public class UserController {
 	@RequestMapping(value = "/deleteUser" , method = RequestMethod.POST)
 	public ResponseEntity<Users> deleteUser(@RequestBody Users user) {
 
-		System.out.println("DLT");
+		System.out.println("Logger : User controller delete.");
 		if (!ObjectUtils.isEmpty(user)) {
 			userService.deleteUser(user);
 			return new ResponseEntity<>(HttpStatus.OK);
