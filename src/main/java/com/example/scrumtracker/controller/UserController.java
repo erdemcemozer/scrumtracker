@@ -7,17 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 /**
  * @author erdemcemozer
  */
 
 @RestController
-@RequestMapping("users")
+@RequestMapping(path = "/users")
 public class UserController {
 
 	@Autowired
@@ -26,9 +25,42 @@ public class UserController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ResponseEntity<Users> createUser(@RequestBody Users user) {
 
+		UUID uuid = UUID.randomUUID();
+		String id = uuid.toString();
+		user.setId(id);
+
 		System.out.println("Testt");
 		if (!ObjectUtils.isEmpty(user)) {
 			userService.createUser(user);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
+	// Overloading for different number of data's that will change.
+	// Will discuss it later.
+	// username,password
+	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+	public ResponseEntity<Users> updateUser(@RequestBody Users user) {
+
+		System.out.println("Updateeee");
+		if (!ObjectUtils.isEmpty(user)) {
+			userService.updateUser(user);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
+	@RequestMapping(value = "/deleteUser" , method = RequestMethod.POST)
+	public ResponseEntity<Users> deleteUser(@RequestBody Users user) {
+
+		System.out.println("DLT");
+		if (!ObjectUtils.isEmpty(user)) {
+			userService.deleteUser(user);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
