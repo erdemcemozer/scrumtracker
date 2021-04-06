@@ -1,5 +1,6 @@
 package com.example.scrumtracker.controller;
 
+import com.example.scrumtracker.model.MeetingResults;
 import com.example.scrumtracker.model.Users;
 import com.example.scrumtracker.service.UserService;
 
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -65,6 +67,16 @@ public class UserController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+
+	}
+
+	@RequestMapping(value = "/getUsers" , method = RequestMethod.GET)
+	public List<Users> getAllUsers() {
+
+		System.out.println("Logger : Listing all users");
+
+		List<Users> usersList = userService.getAllUsers();
+		return usersList;
 
 	}
 
