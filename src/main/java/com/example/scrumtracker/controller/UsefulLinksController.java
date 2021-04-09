@@ -53,9 +53,9 @@ public class UsefulLinksController {
 	public ResponseEntity<Object> deleteLink(@RequestBody UsefulLinks usefulLinks) {
 
 		/*
-		* TODO
-		*  We need to look for deleting an item from databas, mongo uses objectId not string for _id
-		* */
+		 * TODO We need to look for deleting an item from database, mongo uses objectId
+		 * not string for _id
+		 */
 
 		String linkId = usefulLinks.getId();
 		if (linkId == null) {

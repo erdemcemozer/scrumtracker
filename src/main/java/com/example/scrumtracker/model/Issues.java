@@ -21,4 +21,9 @@ public class Issues {
 	String issueTitle;
 	String issueDesc;
 	String issueType;
+	String issueSprintName;
+	String issuePriority;
+	String issueEstimation;
+	String issueStatus;
+
 }

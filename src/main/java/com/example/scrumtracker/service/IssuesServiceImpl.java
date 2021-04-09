@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * @author erdemcemozer
@@ -30,6 +29,10 @@ public class IssuesServiceImpl implements IssuesService {
 			issues.setIssueTitle(issues.getIssueTitle());
 			issues.setIssueDesc(issues.getIssueDesc());
 			issues.setIssueType(issues.getIssueType());
+			issues.setIssueSprintName(issues.getIssueSprintName());
+			issues.setIssueStatus(issues.getIssueStatus());
+			issues.setIssuePriority(issues.getIssuePriority());
+			issues.setIssueEstimation(issues.getIssueEstimation());
 
 			issuesMongoDao.save(issues);
 		} else {
