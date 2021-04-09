@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainWebController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String homepage(){
-        return "signinpage"; // will look later
-    }
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String homepage() {
+		return "signinpage"; // will look later
+	}
 }

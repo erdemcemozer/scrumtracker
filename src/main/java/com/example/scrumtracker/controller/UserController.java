@@ -55,7 +55,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/deleteUser" , method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
 	public ResponseEntity<Users> deleteUser(@RequestBody Users user) {
 
 		System.out.println("Logger : User controller delete.");
