@@ -5,6 +5,8 @@ import com.example.scrumtracker.repository.SprintsMongoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author erdemcemozer
  */
@@ -21,10 +23,30 @@ public class SprintsServiceImpl implements SprintsService {
 		String sprintId = sprints.getSprintId();
 		if (sprintsMongoDao.existsById(sprints.getSprintId())) {
 
-			return null;
+			return sprintId;
 		} else {
 			System.out.println("Logger : Requested sprint not found.");
 		}
 		return null;
 	}
+
+	@Override
+	public List<Sprints> getAllSprints() {
+		return sprintsMongoDao.findAll();
+	}
+
+	@Override
+	public Sprints getLastSprint() {
+
+		List<Sprints> allSprints = sprintsMongoDao.findAll();
+		Integer lastSprintNumber = allSprints.size();
+		if (lastSprintNumber.equals(0)) {
+			System.out.println("ERROR : Sprints not found!");
+		} else {
+			Sprints lastSprint = sprintsMongoDao.findAll().get(lastSprintNumber);
+			return lastSprint;
+		}
+		return null;
+	}
+
 }

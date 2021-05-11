@@ -20,4 +20,5 @@ public class Sprints {
 	String sprintId;
 	String sprintName;
 	String sprintDesc;
+	Integer sprintTotalIssue;
 }
