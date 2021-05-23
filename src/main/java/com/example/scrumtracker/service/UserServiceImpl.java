@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
 			userMongoDao.save(user);
 		} else {
-			System.out.println("Nerede lan bu herif.");
+			System.out.println("Logger : User not found!");
 		}
 
 	}
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 			// Deleting user by id
 			userMongoDao.deleteById(user.getId());
 		} else {
-			System.out.println("Bu eleman burada yok.");
+			System.out.println("Logger : User not found!");
 		}
 	}
 
