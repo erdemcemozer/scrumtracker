@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AnnouncementsMongoDao extends MongoRepository<Announcements, String> {
+
 }

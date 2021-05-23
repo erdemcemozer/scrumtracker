@@ -26,4 +26,5 @@ public class Announcements {
     //Used that annotation to submit a proper date in json
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     Date releaseDate;
+
 }
