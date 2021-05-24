@@ -1,10 +1,7 @@
 package com.example.scrumtracker.controller;
 
 import com.example.scrumtracker.model.Announcements;
-import com.example.scrumtracker.model.MeetingResults;
-import com.example.scrumtracker.model.Users;
 import com.example.scrumtracker.service.AnnouncementsService;
-import com.example.scrumtracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -29,7 +27,7 @@ public class AnnouncementsController {
     private AnnouncementsService announcementsService;
 
     @RequestMapping(value = "/createAnnouncement", method = RequestMethod.POST)
-    public ResponseEntity<Users> createAnnouncement(@RequestBody Announcements announcements) {
+    public ResponseEntity<Announcements> createAnnouncement(@RequestBody Announcements announcements) {
 
         UUID uuid = UUID.randomUUID();
         String id = uuid.toString();
@@ -46,7 +44,7 @@ public class AnnouncementsController {
     }
 
     @RequestMapping(value = "/updateAnnouncement", method = RequestMethod.POST)
-    public ResponseEntity<Users> updateAnnouncement(@RequestBody Announcements announcements) {
+    public ResponseEntity<Announcements> updateAnnouncement(@RequestBody Announcements announcements) {
 
         System.out.println("Logger : Announcement controller update.");
         if (!ObjectUtils.isEmpty(announcements)) {
@@ -59,7 +57,7 @@ public class AnnouncementsController {
     }
 
     @RequestMapping(value = "/deleteAnnouncement", method = RequestMethod.POST)
-    public ResponseEntity<Users> deleteAnnouncement(@RequestBody Announcements announcements) {
+    public ResponseEntity<Announcements> deleteAnnouncement(@RequestBody Announcements announcements) {
 
         System.out.println("Logger : Announcement controller delete.");
         if (!ObjectUtils.isEmpty(announcements)) {
