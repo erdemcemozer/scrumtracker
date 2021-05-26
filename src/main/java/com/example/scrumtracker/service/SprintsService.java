@@ -14,4 +14,10 @@ public interface SprintsService {
 	public List<Sprints> getAllSprints();
 
 	public Sprints getLastSprint();
+
+	public void createSprint(Sprints sprints);
+
+	public void updateSprint(Sprints sprints);
+
+	public void deleteSprint(Sprints sprints);
 }
