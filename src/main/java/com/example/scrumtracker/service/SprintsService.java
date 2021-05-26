@@ -3,6 +3,7 @@ package com.example.scrumtracker.service;
 import com.example.scrumtracker.model.Sprints;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author erdemcemozer
@@ -20,4 +21,6 @@ public interface SprintsService {
 	public void updateSprint(Sprints sprints);
 
 	public void deleteSprint(Sprints sprints);
+
+	public Optional<Sprints> getSprint(Sprints sprint);
 }

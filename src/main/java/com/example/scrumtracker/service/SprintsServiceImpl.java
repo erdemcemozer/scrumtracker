@@ -1,12 +1,12 @@
 package com.example.scrumtracker.service;
 
-import com.example.scrumtracker.model.Issues;
 import com.example.scrumtracker.model.Sprints;
 import com.example.scrumtracker.repository.SprintsMongoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author erdemcemozer
@@ -76,6 +76,16 @@ public class SprintsServiceImpl implements SprintsService {
 		} else {
 			System.out.println("Error : No sprints found for deleting.");
 		}
+	}
+
+	@Override
+	public Optional<Sprints> getSprint(Sprints sprint) {
+
+		if (sprintsMongoDao.existsById(sprint.getSprintId())) {
+			return sprintsMongoDao.findById(sprint.getSprintId());
+		}
+		System.out.println("ERROR : No sprint found by id.");
+		return null;
 	}
 
 }
