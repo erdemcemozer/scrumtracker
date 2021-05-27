@@ -18,11 +18,11 @@ public class Users {
 
 	@Id
 	String id;
-	String username;
+	String name;
+	String surname;
 	String password;
+	String phone;
 	String email;
 	String team;
-	// more user info will be added
-	// date of birth, email maybe?
 
 }
