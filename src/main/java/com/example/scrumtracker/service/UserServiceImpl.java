@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 			user.setPassword(encodePassword(user));
 			userMongoDao.save(user);
 		} else {
-			System.out.println("Logger : User already exists!");
+			System.out.println("Logger : Phone number or Email address already exists!");
 		}
 	}
 
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 	public String encodePassword(Users user){
 
 		String password = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
-		System.out.println(password);
+		//System.out.println(password);
 
 		return password;
 	}
