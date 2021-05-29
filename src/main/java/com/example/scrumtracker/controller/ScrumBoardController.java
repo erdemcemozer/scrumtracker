@@ -70,6 +70,9 @@ public class ScrumBoardController {
 
 	@RequestMapping(value = "/createSprint", method = RequestMethod.POST)
 	public ResponseEntity<Sprints> createSprint(@RequestBody Sprints sprint) {
+
+		Integer totalIssue = getTotalIssue(sprint);
+		sprint.setSprintTotalIssue(totalIssue);
 		if (!ObjectUtils.isEmpty(sprint)) {
 			sprintsService.createSprint(sprint);
 			return new ResponseEntity<>(HttpStatus.OK);
