@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.List;
 import java.util.UUID;
 
@@ -23,59 +22,59 @@ import java.util.UUID;
 @RequestMapping(path = "/announcements")
 public class AnnouncementsController {
 
-    @Autowired
-    private AnnouncementsService announcementsService;
+	@Autowired
+	private AnnouncementsService announcementsService;
 
-    @RequestMapping(value = "/createAnnouncement", method = RequestMethod.POST)
-    public ResponseEntity<Announcements> createAnnouncement(@RequestBody Announcements announcements) {
+	@RequestMapping(value = "/createAnnouncement", method = RequestMethod.POST)
+	public ResponseEntity<Announcements> createAnnouncement(@RequestBody Announcements announcements) {
 
-        UUID uuid = UUID.randomUUID();
-        String id = uuid.toString();
-        announcements.setAnnouncementId(id);
+		UUID uuid = UUID.randomUUID();
+		String id = uuid.toString();
+		announcements.setAnnouncementId(id);
 
-        System.out.println("Logger : Announcement controller create.");
-        if (!ObjectUtils.isEmpty(announcements)) {
-            announcementsService.createAnnouncement(announcements);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+		System.out.println("Logger : Announcement controller create.");
+		if (!ObjectUtils.isEmpty(announcements)) {
+			announcementsService.createAnnouncement(announcements);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 
-    }
+	}
 
-    @RequestMapping(value = "/updateAnnouncement", method = RequestMethod.POST)
-    public ResponseEntity<Announcements> updateAnnouncement(@RequestBody Announcements announcements) {
+	@RequestMapping(value = "/updateAnnouncement", method = RequestMethod.POST)
+	public ResponseEntity<Announcements> updateAnnouncement(@RequestBody Announcements announcements) {
 
-        System.out.println("Logger : Announcement controller update.");
-        if (!ObjectUtils.isEmpty(announcements)) {
-            announcementsService.updateAnnouncement(announcements);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+		System.out.println("Logger : Announcement controller update.");
+		if (!ObjectUtils.isEmpty(announcements)) {
+			announcementsService.updateAnnouncement(announcements);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 
-    }
+	}
 
-    @RequestMapping(value = "/deleteAnnouncement", method = RequestMethod.POST)
-    public ResponseEntity<Announcements> deleteAnnouncement(@RequestBody Announcements announcements) {
+	@RequestMapping(value = "/deleteAnnouncement", method = RequestMethod.POST)
+	public ResponseEntity<Announcements> deleteAnnouncement(@RequestBody Announcements announcements) {
 
-        System.out.println("Logger : Announcement controller delete.");
-        if (!ObjectUtils.isEmpty(announcements)) {
-            announcementsService.deleteAnnouncement(announcements);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+		System.out.println("Logger : Announcement controller delete.");
+		if (!ObjectUtils.isEmpty(announcements)) {
+			announcementsService.deleteAnnouncement(announcements);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 
-    }
+	}
 
-    @RequestMapping(value = "/getAnnouncements", method = RequestMethod.GET)
-    public List<Announcements> getAllAnnouncements() {
+	@RequestMapping(value = "/getAnnouncements", method = RequestMethod.GET)
+	public List<Announcements> getAllAnnouncements() {
 
-        System.out.println("Logger : Listing all announcements");
+		System.out.println("Logger : Listing all announcements");
 
-        List<Announcements> announcementsList = announcementsService.getAllAnnouncements();
-        return announcementsList;
-    }
+		List<Announcements> announcementsList = announcementsService.getAllAnnouncements();
+		return announcementsList;
+	}
 
 }

@@ -5,13 +5,14 @@ import com.example.scrumtracker.model.Sprints;
 import com.example.scrumtracker.service.IssuesService;
 import com.example.scrumtracker.service.SprintsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author erdemcemozer
@@ -50,6 +51,14 @@ public class DashboardController {
 
 			return lastSprint;
 		}
+	}
+
+	@RequestMapping(value = "/getSelectedSprint", method = RequestMethod.GET)
+	public Optional<Sprints> getSelectedSprint(@RequestBody Sprints sprints) {
+		if (!ObjectUtils.isEmpty(sprints)) {
+			return sprintsService.getSprint(sprints);
+		}
+		return null;
 	}
 
 	@RequestMapping(value = "/getIssuesForSprint", method = RequestMethod.GET)
