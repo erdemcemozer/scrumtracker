@@ -1,6 +1,5 @@
 <template>
     <v-container>
-
         <v-card rounded="lg" color="transparent" class="neumerophism">
 
             <div class="d-flex pa-3">
@@ -11,7 +10,7 @@
                               :label="$t('search')"
                               single-line flat rounded
                               hide-details/>
-                <link-dialog/>
+                <link-dialog :open="addDialog" :form="form" @add-task="addTask($event)"/>
             </div>
 
             <v-divider/>
@@ -31,7 +30,27 @@
 
 
                 </template>
+                <template #item.action="{ item }">
+                    <div class="d-flex">
+                        <v-tooltip top>
+                            <template #activator="{ on }">
+                                <v-btn icon color="grey" v-on="on" @click="edit(item)">
+                                    <v-icon v-text="'mdi-pencil'"/>
+                                </v-btn>
+                            </template>
+                            {{ $t('edit') }}
+                        </v-tooltip>
 
+                        <v-tooltip top>
+                            <template #activator="{ on }">
+                                <v-btn icon color="grey" v-on="on" class="ml-3">
+                                    <v-icon v-text="'mdi-delete-outline'"/>
+                                </v-btn>
+                            </template>
+                            {{ $t('delete') }}
+                        </v-tooltip>
+                    </div>
+                </template>
             </v-data-table>
         </v-card>
 
@@ -39,7 +58,7 @@
 </template>
 
 <script>
-import LinkDialog from "@/components/pages/announcements/Dialog";
+import LinkDialog from "@/components/pages/announcements/AnnouncementsDialog";
 
 export default {
     name: "announcements",
@@ -50,74 +69,51 @@ export default {
         return {
             pageTitle: this.$t('announcements'),
             search: '',
+            addDialog: false,
+            form: null,
             headers: [
                 {
                     text: this.$t('announcementTitle'),
                     align: 'start',
                     sortable: false,
-                    value: 'name',
+                    value: 'announcementTitle',
                 },
                 {
                     text: this.$t('description'),
                     sortable: false,
-                    value: 'detail',
+                    value: 'announcementDescription',
                 },
-
+                {
+                    text: "Date",
+                    sortable: false,
+                    value: 'releaseDate',
+                },
+                {text: null, value: 'action', sortable: false, width: 20},
             ],
-            desserts: [
-                {
-                    name: 'Duyuru 1',
-                    detail: 'Duyuru 1 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 2',
-                    detail: 'Duyuru 2 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 3',
-                    detail: 'Duyuru 3 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 4',
-                    detail: 'Duyuru 4 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 5',
-                    detail: 'Duyuru 5 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 6',
-                    detail: 'Duyuru 6 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 7',
-                    detail: 'Duyuru 7 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 8',
-                    detail: 'Duyuru 8 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 9',
-                    detail: 'Duyuru 9 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 10',
-                    detail: 'Duyuru 10 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 11',
-                    detail: 'Duyuru 11 ile ilgili detaylar burada yeralmaktadır.',
-                },
-                {
-                    name: 'Duyuru 12',
-                    detail: 'Duyuru 12 ile ilgili detaylar burada yeralmaktadır.',
-                },
-            ],
+            desserts: [],
         }
     },
-    created() {
+    async created() {
         this.$store.commit('SET_PAGE_TITLE', this.pageTitle)
+        await this.$store.dispatch('GET_ANNOUNCEMENTS').then(()=>{
+                this.desserts = this.$store.state.announcements
+            }
+        )
+    },
+    watch: {
+        '$store.state.announcements'(val) {
+            this.desserts = val
+            this.$nuxt.refresh()
+        }
+    },
+    methods: {
+        addTask(task) {
+            this.addDialog = task
+        },
+        edit(item) {
+            this.dialog = false
+            this.form = item
+        }
     }
 }
 </script>

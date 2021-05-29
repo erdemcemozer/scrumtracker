@@ -1,6 +1,6 @@
 <template>
     <div class="text-center">
-        <v-dialog v-model="dialog" width="500">
+        <v-dialog v-model="dialog" width="500" @click:outside="$emit('add-task', false)">
             <template #activator="{ on, attrs }">
 
                 <v-btn class="neumerophism"
@@ -20,7 +20,7 @@
 
                 <v-row justify="center">
                     <v-col cols="12">
-                        <v-text-field v-model="title"
+                        <v-text-field v-model="announcementTitle"
                                       :label="$t('announcementTitle')+':'"
                                       outlined dense rounded required
                                       prepend-inner-icon="mdi-bullhorn-outline"/>
@@ -28,7 +28,7 @@
                     </v-col>
                     <v-col cols="12">
 
-                        <v-text-field v-model="description"
+                        <v-text-field v-model="announcementDescription"
                                       :label="$t('description')+':'"
                                       outlined dense rounded required
                                       prepend-inner-icon="mdi-comment-text-outline"/>
@@ -52,18 +52,41 @@
 <script>
 export default {
     name: "Dialog",
+    props: {
+      open: {
+          default: false,
+          type: Boolean
+      },
+        form: {
+            default: null,
+            type: Object
+        }
+    },
     data(){
         return {
             dialog: false,
-            title: null,
-            description: null
+            announcementTitle: null,
+            announcementDescription: null
         }
     },
     methods:{
-        submit(){
+        async submit(){
+            const [day,month,year] = new Date().toLocaleDateString().split('.')
+            const releaseDate = `${day}-${month}-${year}`
+            await this.$store.dispatch('POST_ANNOUNCEMENTS_ADD', {announcementTitle: this.announcementTitle,
+                announcementDescription: this.announcementDescription, releaseDate}).then(()=>{
+                this.$nuxt.refresh()
+            })
             this.dialog = false
+        },
+    },
+    watch:{
+        open(val){
+            if(val === true || val === false){
+                this.dialog = true
+            }
         }
-    }
+    },
 }
 </script>
 

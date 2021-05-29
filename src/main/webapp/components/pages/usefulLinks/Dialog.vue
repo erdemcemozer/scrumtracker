@@ -62,6 +62,9 @@ export default {
     methods:{
         submit(){
             this.dialog = false
+            this.$store.dispatch('POST_USEFUL_LINKS_ADD', {link: this.link, description: this.description}).then(()=>{
+                this.$nuxt.refresh()
+            })
         }
     }
 }

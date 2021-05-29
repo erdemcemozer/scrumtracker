@@ -61,6 +61,7 @@ export default {
     methods:{
         addTask(){
             this.$emit('add-task', this.form)
+            this.$store.dispatch('POST_SPRINT_ADD', this.form)
             this.dialog = false
         }
     }

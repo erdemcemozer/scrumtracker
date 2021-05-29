@@ -22,7 +22,7 @@
                           :search="search"
                           class="transparent">
 
-                <template #item.name="{item}">
+               <template #item.name="{item}">
 
                     <v-icon v-text="'mdi-arrow-right-thin-circle-outline'" class="mr-2" v-if="$vuetify.breakpoint.mdAndUp"/>
 
@@ -30,10 +30,8 @@
                         {{ item.name }}
                     </a>
                 </template>
-
             </v-data-table>
         </v-card>
-
     </v-container>
 </template>
 
@@ -54,93 +52,32 @@ export default {
                     text: this.$t('link'),
                     align: 'start',
                     sortable: false,
-                    value: 'name',
+                    value: 'linkName',
                 },
                 {
                     text: this.$t('description'),
                     sortable: false,
-                    value: 'calories',
+                    value: 'linkDescription',
                 },
 
             ],
             desserts: [
-                {
-                    name: 'https://www.youtube.com/',
-                    calories: 'Detaylı bilgi almak için Youtube sayfasını ziyaret edebilirsiniz.',
-                },
-                {
-                    name: 'https://github.com/SadettinAyyildiz',
-                    calories: 'Github sayfamı ziyaret ederek detaylara ulaşabilirsiniz.',
-                },
-                {
-                    name: 'https://www.w3schools.com/js/js_errors.asp',
-                    calories: 'Javascrip hata yöntemleri için linke bakabilirsiniz',
-                },
-                {
-                    name: 'https://www.google.com.tr/',
-                    calories: 'Google sayfasını ziyaret etmeden olmaz.',
-                },
-                {
-                    name: 'https://stackoverflow.com/questions/',
-                    calories: 'İlgili hatanın linki bulundu',
-                },
-                {
-                    name: 'https://www.biobilgi.com/',
-                    calories: 'Güzel bir blog sitesi',
-                },
-                {
-                    name: 'https://www.youtube.com/',
-                    calories: 'Detaylı bilgi almak için Youtube sayfasını ziyaret edebilirsiniz.',
-                },
-                {
-                    name: 'https://github.com/SadettinAyyildiz',
-                    calories: 'Github sayfamı ziyaret ederek detaylara ulaşabilirsiniz.',
-                },
-                {
-                    name: 'https://www.w3schools.com/js/js_errors.asp',
-                    calories: 'Javascrip hata yöntemleri için linke bakabilirsiniz',
-                },
-                {
-                    name: 'https://www.google.com.tr/',
-                    calories: 'Google sayfasını ziyaret etmeden olmaz.',
-                },
-                {
-                    name: 'https://stackoverflow.com/questions/',
-                    calories: 'İlgili hatanın linki bulundu',
-                },
-                {
-                    name: 'https://www.biobilgi.com/',
-                    calories: 'Güzel bir blog sitesi',
-                },
-                {
-                    name: 'https://www.youtube.com/',
-                    calories: 'Detaylı bilgi almak için Youtube sayfasını ziyaret edebilirsiniz.',
-                },
-                {
-                    name: 'https://github.com/SadettinAyyildiz',
-                    calories: 'Github sayfamı ziyaret ederek detaylara ulaşabilirsiniz.',
-                },
-                {
-                    name: 'https://www.w3schools.com/js/js_errors.asp',
-                    calories: 'Javascrip hata yöntemleri için linke bakabilirsiniz',
-                },
-                {
-                    name: 'https://www.google.com.tr/',
-                    calories: 'Google sayfasını ziyaret etmeden olmaz.',
-                },
-                {
-                    name: 'https://stackoverflow.com/questions/',
-                    calories: 'İlgili hatanın linki bulundu',
-                },
-                {
-                    name: 'https://www.biobilgi.com/',
-                    calories: 'Güzel bir blog sitesi',
-                },
+
             ],
         }
     },
-    created() {
-        this.$store.commit('SET_PAGE_TITLE', this.pageTitle)
+    async created() {
+        await this.$store.commit('SET_PAGE_TITLE', this.pageTitle)
+        await this.$store.dispatch('GET_USEFUL_LINKS').then(()=>{
+              this.desserts = this.$store.state.usefulLinks
+            }
+        )
+    },
+    watch: {
+        '$store.state.usefulLinks'(val) {
+            this.desserts = val
+            this.$nuxt.refresh()
+        }
     }
 }
 </script>
