@@ -3,6 +3,8 @@
 
         <app-nav-bar-drawer/>
 
+        <app-header-app-bar/>
+
         <v-main>
             <nuxt/>
         </v-main>
@@ -47,7 +49,25 @@ export default {
 
 
 .neumerophism{
-    box-shadow: 5px 5px 14px 0 rgba(0, 0, 0, 0.08), -12px -12px 10px 0 rgba(255, 255, 255, 0.4);
+    box-shadow: 5px 5px 14px 0 rgba(0, 0, 0, 0.08), -12px -12px 10px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+.hole {
+
+    height:250px;
+    width:250px;
+    background-color:green;/*for testing only*/
+    border:black solid 1px;
+
+    /*rotate the image on its Y axis */
+    -webkit-transform: rotateY(145deg); /* Chrome, Safari, Opera */
+    transform: rotateY(145deg);
+
+    /*rotate the image on its Z axis */
+    -webkit-transform: rotateZ(179deg); /* Chrome, Safari, Opera */
+    transform: rotateZ(179deg);
+
+
 }
 
 </style>

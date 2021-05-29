@@ -1,13 +1,12 @@
 <template>
-<div>Product Backlog</div>
+    <product-backlog/>
 </template>
 
 <script>
+import ProductBacklog from "@/components/pages/productBacklog/ProductBacklog";
 export default {
-    name: "index"
+    name: "index",
+    components: {ProductBacklog}
 }
 </script>
 
-<style scoped>
-
-</style>

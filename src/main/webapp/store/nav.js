@@ -2,42 +2,49 @@ export const state = () => ({
 
     sections: [
         {
-            name: 'Scrum Board',
+            name: 'scrumBoard',
             icon: 'view-dashboard-outline',
             path: 'sections-scrum-board',
             content: null,
             children: []
         },
         {
-            name: 'Product Backlog',
+            name: 'productBacklog',
             icon: 'flag-outline',
             path: 'sections-product-backlog',
             content: null,
             children: []
         },
         {
-            name: 'Issues',
-            icon: 'alert-circle-outline',
-            path: 'sections-issues',
+            name: 'dashBoard',
+            icon: 'monitor-dashboard',
+            path: 'sections-dash-board',
             content: null,
             children: []
         },
         {
-            name: 'Meeting Results',
+            name: 'meetingResults',
             icon: 'account-group-outline',
             path: 'sections-meeting-result',
             content: null,
             children: []
         },
         {
-            name: 'Useful Links',
+            name: 'usefulLinks',
             icon: 'link-variant',
             path: 'sections-useful-links',
             content: null,
             children: []
         },
         {
-            name: 'Settings',
+            name: 'announcements',
+            icon: 'bullhorn-outline',
+            path: 'sections-announcements',
+            content: null,
+            children: []
+        },
+        {
+            name: 'settings',
             icon: 'cog-outline',
             path: 'sections-settings',
             content: null,

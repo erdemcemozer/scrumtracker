@@ -9,16 +9,20 @@
         "generate": "nuxt generate"
     },
     "dependencies": {
+        "@nuxtjs/auth": "^4.9.1",
         "@nuxtjs/axios": "^5.12.2",
         "@nuxtjs/pwa": "^3.0.2",
+        "@nuxtjs/universal-storage": "^0.5.7",
+        "animate.css": "^4.1.1",
         "core-js": "^3.6.5",
+        "nan": "^2.14.2",
         "nuxt": "^2.14.6",
         "nuxt-i18n": "^6.20.1",
-        "@nuxtjs/universal-storage": "^0.5.7",
-        "vuelidate": "^0.7.6",
-        "@nuxtjs/auth": "^4.9.1"
+        "vuedraggable": "^2.24.3",
+        "vuelidate": "^0.7.6"
     },
     "devDependencies": {
+        "@nuxt/types": "^2.15.6",
         "@nuxtjs/vuetify": "^1.11.2"
     }
 }

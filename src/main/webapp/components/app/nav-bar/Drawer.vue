@@ -29,10 +29,14 @@ export default {
     name: "NavBarDrawer",
     data () {
         return {
-            drawer: true,
+            drawer: this.$vuetify.breakpoint.mdAndUp,
         }
     },
     computed:{
+
+        navbarToggle(){
+            return this.$store.state.navbarToggle
+        },
 
         miniVariant(){
             return this.$store.state.miniVariant
@@ -41,6 +45,16 @@ export default {
         expandOnHover(){
             return this.miniVariant === true
         }
+    },
+    watch:{
+        navbarToggle(val){
+            this.drawer = val
+        },
+        drawer(val){
+            if(val === false){
+                this.$store.commit('SET_NAVBAR_TOGGLE', false)
+            }
+        },
     }
 }
 </script>

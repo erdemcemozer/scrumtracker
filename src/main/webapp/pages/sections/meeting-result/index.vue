@@ -1,10 +1,14 @@
 <template>
-<div>Meeting Results</div>
+    <meeting-result/>
 </template>
 
 <script>
+import MeetingResult from "~/components/pages/meeting-result/MeetingResult";
 export default {
-    name: "index"
+    name: "index",
+    components: {
+        MeetingResult
+    }
 }
 </script>
 

@@ -65,7 +65,7 @@ export default {
                     success: colors.green.accent3
                 },
                 light: {
-                    light: '#ecf2f6',
+                    light: '#ccd7de',
                 },
             }
         }

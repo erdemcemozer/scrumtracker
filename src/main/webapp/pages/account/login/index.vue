@@ -3,7 +3,7 @@
         <account-grid>
 
             <template #presentation>
-                aaa
+                <account-presentation/>
             </template>
 
             <template #form>
