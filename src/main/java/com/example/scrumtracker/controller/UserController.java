@@ -24,7 +24,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
 	public ResponseEntity<Users> createUser(@RequestBody Users user) {
 
 		UUID uuid = UUID.randomUUID();
