@@ -1,6 +1,7 @@
 <template>
+    <div class="d-flex px-3 py-2" :class="miniVariantStatus ? 'justify-center flex-wrap' : 'justify-space-between'">
 
-    <div class="d-flex px-3 py-2" :class="miniVariantStatus ? 'justify-center' : 'justify-end'">
+        <app-nav-bar-language :mini-variant="miniVariantStatus"/>
 
         <v-btn icon @click="setMiniVariant" class="neumerophism">
             <v-icon v-text="`mdi-arrow-${miniVariantStatus ? 'right' : 'left'}`"/>

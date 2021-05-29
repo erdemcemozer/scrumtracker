@@ -1,3 +1,50 @@
 export default {
-    helloWorld:                             "Hello World"
+    helloWorld                          : "Hello World",
+    settings                            : "Settings",
+
+    features                            : "Features",
+    loginTitle                          : "Login to ScrumTracker Account",
+    registrationTitle                   : "Sign Up to ScrumTracker",
+    usefulLinks                         : "Useful Links",
+    link                                : "Link",
+    addLink                             : "Add Link",
+    issues                              : "Issues",
+    addLinkAndDescription               : "Add Link and Description",
+    search                              : "Search",
+    description                         : "Description",
+    homePage                            : "Home Page",
+    login                               : "Login",
+    signUp                              : "Sign Up",
+    dontYouHaveAccount                  : "Don't you have ScrumTracker account?",
+    doYouHaveAccount                    : "Do you have ScrumTracker account?",
+    password                            : "Password",
+    email                               : "E-mail",
+    rememberMe                          : "Remember me.",
+    phone                               : "Phone",
+    name                                : "Name",
+    surname                             : "Surname",
+    verifyPassword                      : "Verify Password:",
+    add                                 : "Add",
+    changePhoto                         : "Click to change your photo.",
+    save                                : "Save",
+    meetingResults                      : "Meeting Results",
+
+    isRequired                          : "Bu alan boş bırakılamaz!",
+    invalidEmailError                   : "Lütfen geçerli bir e-mail girin!",
+    invalidPhoneNumberError             : "Lütfen geçerli bir telefon numarası girin!",
+    invalidNameError                    : "Lütfen geçerli bir isim girin!",
+    invalidSurnameError                 : "Lütfen geçerli bir soyisim girin!",
+    sameAsPassword                      : "Parolalarınız eşleşmiyor!",
+    announcements                       : "Announcements",
+    title                               : "Title",
+    announcementTitle                   : "Announcement Title",
+    addAnnouncement                     : "Add Announcement",
+    addAnnouncementTitle                : "Lütfen Konu ve Açıklama Girin",
+    dashBoard                           : "Dash Board",
+    productBacklog                      : "Product Backlog",
+    scrumBoard                          : "Scrum Board",
+
+
+
+
 }

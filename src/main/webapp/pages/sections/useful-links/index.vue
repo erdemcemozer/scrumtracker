@@ -1,5 +1,5 @@
 <template>
-<div>Useful Links</div>
+    <useful-links/>
 </template>
 
 <script>
