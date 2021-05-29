@@ -19,12 +19,12 @@ import java.util.Date;
 @Document
 public class Announcements {
 
-    @Id
-    String announcementId;
-    String announcementTitle;
-    String announcementDescription;
-    //Used that annotation to submit a proper date in json
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-    Date releaseDate;
+	@Id
+	String announcementId;
+	String announcementTitle;
+	String announcementDescription;
+	// Used that annotation to submit a proper date in json
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	Date releaseDate;
 
 }

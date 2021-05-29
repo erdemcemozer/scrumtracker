@@ -25,5 +25,6 @@ public class Issues {
 	String issuePriority;
 	String issueEstimation;
 	String issueStatus;
+	String issueOwner;
 
 }

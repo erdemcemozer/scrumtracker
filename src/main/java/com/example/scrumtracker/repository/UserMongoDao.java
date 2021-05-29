@@ -7,14 +7,12 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author erdemcemozer
- *
- * We need to check for Mongo's functions
  */
 
 @Repository
-public interface UserMongoDao extends MongoRepository<Users, String>{
+public interface UserMongoDao extends MongoRepository<Users, String> {
 
-    @Query("{ 'email' :?0 }")
-    Users findByEmail(String email);
+	@Query("{ 'email' :?0 }")
+	Users findByEmail(String email);
 
 }

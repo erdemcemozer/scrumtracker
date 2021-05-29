@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
 		phones = new ArrayList<>(getAllUsers().size());
 		getPhones(phones);
 
-		if(!emails.contains(user.getEmail()) && !phones.contains(user.getPhone())){
-			//encrypt/decrypt operations should be here
+		if (!emails.contains(user.getEmail()) && !phones.contains(user.getPhone())) {
+			// encrypt/decrypt operations should be here
 			user.setPassword(encodePassword(user));
 			userMongoDao.save(user);
 		} else {
@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUser(Users user) {
 
-		//Deleted the updated users email/phone values from list so that they cant have the same email/phone with other users.
+		// Deleted the updated users email/phone values from list so that they cant have
+		// the same email/phone with other users.
 		emails = new ArrayList<>(getAllUsers().size());
 		getEmails(emails);
 		emails.remove(emails.indexOf(userMongoDao.findById(user.getId()).get().getEmail()));
@@ -51,11 +52,11 @@ public class UserServiceImpl implements UserService {
 		phones.remove(phones.indexOf(userMongoDao.findById(user.getId()).get().getPhone()));
 
 		if (userMongoDao.existsById(user.getId())) {
-			if(!emails.contains(user.getEmail()) && !phones.contains(user.getPhone())){
+			if (!emails.contains(user.getEmail()) && !phones.contains(user.getPhone())) {
 				// Setting new values
 				user.setName(user.getName());
 				user.setSurname(user.getSurname());
-				//Setting encrypted password
+				// Setting encrypted password
 				user.setPassword(encodePassword(user));
 				user.setPhone(user.getPhone());
 				user.setEmail(user.getEmail());
@@ -88,24 +89,24 @@ public class UserServiceImpl implements UserService {
 		return userMongoDao.findAll();
 	}
 
-	public String encodePassword(Users user){
+	public String encodePassword(Users user) {
 
-		String password = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
-		//System.out.println(password);
+		String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+		// System.out.println(password);
 
 		return password;
 	}
 
-	public void getEmails(List<String> emails){
+	public void getEmails(List<String> emails) {
 		emails.clear();
-		for(int i=0; i<getAllUsers().size(); i++){
+		for (int i = 0; i < getAllUsers().size(); i++) {
 			emails.add(getAllUsers().get(i).getEmail());
 		}
 	}
 
-	public void getPhones(List<String> phones){
+	public void getPhones(List<String> phones) {
 		phones.clear();
-		for(int i=0; i<getAllUsers().size(); i++){
+		for (int i = 0; i < getAllUsers().size(); i++) {
 			phones.add(getAllUsers().get(i).getPhone());
 		}
 	}

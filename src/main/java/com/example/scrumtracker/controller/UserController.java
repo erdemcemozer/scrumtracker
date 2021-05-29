@@ -1,6 +1,5 @@
 package com.example.scrumtracker.controller;
 
-import com.example.scrumtracker.model.MeetingResults;
 import com.example.scrumtracker.model.Users;
 import com.example.scrumtracker.service.UserService;
 
@@ -41,9 +40,6 @@ public class UserController {
 
 	}
 
-	// Overloading for different number of data's that will change.
-	// Will discuss it later.
-	// username,password
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public ResponseEntity<Users> updateUser(@RequestBody Users user) {
 

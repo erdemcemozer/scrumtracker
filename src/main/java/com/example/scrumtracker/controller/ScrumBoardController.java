@@ -100,7 +100,7 @@ public class ScrumBoardController {
 		}
 	}
 
-	private Integer getTotalIssue(Sprints sprints){
+	private Integer getTotalIssue(Sprints sprints) {
 		List<Issues> issuesList = issuesService.getAllIssues();
 		Integer totalIssue = 0;
 

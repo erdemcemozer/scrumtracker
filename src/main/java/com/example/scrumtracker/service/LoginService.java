@@ -8,6 +8,6 @@ import com.example.scrumtracker.model.Users;
 
 public interface LoginService {
 
-    void login(Users user);
+	void login(Users user);
 
 }

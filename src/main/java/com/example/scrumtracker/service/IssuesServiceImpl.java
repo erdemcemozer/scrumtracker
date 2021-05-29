@@ -34,6 +34,7 @@ public class IssuesServiceImpl implements IssuesService {
 			issues.setIssueStatus(issues.getIssueStatus());
 			issues.setIssuePriority(issues.getIssuePriority());
 			issues.setIssueEstimation(issues.getIssueEstimation());
+			issues.setIssueOwner(issues.getIssueOwner());
 
 			issuesMongoDao.save(issues);
 		} else {

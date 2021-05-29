@@ -19,12 +19,12 @@ import java.util.Date;
 @Document
 public class MeetingResults {
 
-    @Id
-    String meetingId;
-    String meetingType;
-    String title;
-    String description;
-    //Used that annotation to submit a proper date in json
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-    Date meetingDate;
+	@Id
+	String meetingId;
+	String meetingType;
+	String title;
+	String description;
+	// Used that annotation to submit a proper date in json
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	Date meetingDate;
 }

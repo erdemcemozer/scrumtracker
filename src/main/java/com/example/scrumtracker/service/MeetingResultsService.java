@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface MeetingResultsService {
 
-    void createMeetingResult(MeetingResults results);
+	void createMeetingResult(MeetingResults results);
 
-    void updateMeetingResult(MeetingResults results);
+	void updateMeetingResult(MeetingResults results);
 
-    void deleteMeetingResult(MeetingResults results);
+	void deleteMeetingResult(MeetingResults results);
 
-    List<MeetingResults> getAllMeetingResults();
+	List<MeetingResults> getAllMeetingResults();
 }

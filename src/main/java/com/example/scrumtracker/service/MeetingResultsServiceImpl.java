@@ -12,44 +12,44 @@ import java.util.List;
  */
 
 @Service
-public class MeetingResultsServiceImpl implements MeetingResultsService{
+public class MeetingResultsServiceImpl implements MeetingResultsService {
 
-    @Autowired
-    private MeetingResultsMongoDao resultsMongoDao;
+	@Autowired
+	private MeetingResultsMongoDao resultsMongoDao;
 
-    @Override
-    public void createMeetingResult(MeetingResults results) {
-        //Inserting meeting
-        resultsMongoDao.insert(results);
-    }
+	@Override
+	public void createMeetingResult(MeetingResults results) {
+		// Inserting meeting
+		resultsMongoDao.insert(results);
+	}
 
-    @Override
-    public void updateMeetingResult(MeetingResults results) {
-        if(resultsMongoDao.existsById(results.getMeetingId())){
-            //Update
-            results.setMeetingType(results.getMeetingType());
-            results.setTitle(results.getTitle());
-            results.setDescription(results.getDescription());
-            results.setMeetingDate(results.getMeetingDate());
+	@Override
+	public void updateMeetingResult(MeetingResults results) {
+		if (resultsMongoDao.existsById(results.getMeetingId())) {
+			// Update
+			results.setMeetingType(results.getMeetingType());
+			results.setTitle(results.getTitle());
+			results.setDescription(results.getDescription());
+			results.setMeetingDate(results.getMeetingDate());
 
-            resultsMongoDao.save(results);
-        } else {
-            System.out.println("Logger : Requested meeting not found.");
-        }
-    }
+			resultsMongoDao.save(results);
+		} else {
+			System.out.println("Logger : Requested meeting not found.");
+		}
+	}
 
-    @Override
-    public void deleteMeetingResult(MeetingResults results) {
-        if(resultsMongoDao.existsById(results.getMeetingId())){
-            //Delete
-            resultsMongoDao.deleteById(results.getMeetingId());
-        } else {
-            System.out.println("Logger : Requested meeting does not exists.");
-        }
-    }
+	@Override
+	public void deleteMeetingResult(MeetingResults results) {
+		if (resultsMongoDao.existsById(results.getMeetingId())) {
+			// Delete
+			resultsMongoDao.deleteById(results.getMeetingId());
+		} else {
+			System.out.println("Logger : Requested meeting does not exists.");
+		}
+	}
 
-    @Override
-    public List<MeetingResults> getAllMeetingResults() {
-        return resultsMongoDao.findAll();
-    }
+	@Override
+	public List<MeetingResults> getAllMeetingResults() {
+		return resultsMongoDao.findAll();
+	}
 }
