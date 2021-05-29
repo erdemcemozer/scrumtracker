@@ -18,7 +18,7 @@ public interface SprintsService {
 
 	public void createSprint(Sprints sprints);
 
-	public void updateSprint(Sprints sprints);
+	public void updateSprint(Sprints sprints, Integer totalIssue);
 
 	public void deleteSprint(Sprints sprints);
 

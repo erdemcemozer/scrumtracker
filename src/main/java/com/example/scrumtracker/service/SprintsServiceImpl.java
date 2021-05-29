@@ -56,11 +56,12 @@ public class SprintsServiceImpl implements SprintsService {
 	}
 
 	@Override
-	public void updateSprint(Sprints sprints) {
+	public void updateSprint(Sprints sprints, Integer totalIssue) {
 
 		if (sprintsMongoDao.existsById(sprints.getSprintId())) {
 			sprints.setSprintDesc(sprints.getSprintDesc());
 			sprints.setSprintName(sprints.getSprintName());
+			sprints.setSprintTotalIssue(totalIssue);
 
 			sprintsMongoDao.save(sprints);
 		} else {

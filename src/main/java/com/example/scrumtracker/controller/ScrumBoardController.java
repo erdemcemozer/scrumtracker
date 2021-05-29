@@ -4,7 +4,6 @@ import com.example.scrumtracker.model.Issues;
 import com.example.scrumtracker.model.Sprints;
 import com.example.scrumtracker.service.IssuesService;
 import com.example.scrumtracker.service.SprintsService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -87,5 +86,30 @@ public class ScrumBoardController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+	}
+
+	@RequestMapping(value = "/updateSprint", method = RequestMethod.POST)
+	public ResponseEntity<Sprints> updateSprint(@RequestBody Sprints sprint) {
+
+		Integer totalIssue = getTotalIssue(sprint);
+		if (!ObjectUtils.isEmpty(sprint)) {
+			sprintsService.updateSprint(sprint, totalIssue);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	private Integer getTotalIssue(Sprints sprints){
+		List<Issues> issuesList = issuesService.getAllIssues();
+		Integer totalIssue = 0;
+
+		for (Issues issue : issuesList) {
+			if (issue.getIssueSprintName().equals(sprints.getSprintName())) {
+				totalIssue++;
+			}
+		}
+
+		return totalIssue;
 	}
 }
