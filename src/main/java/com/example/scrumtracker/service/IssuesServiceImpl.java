@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author erdemcemozer
@@ -53,6 +54,11 @@ public class IssuesServiceImpl implements IssuesService {
 	@Override
 	public List<Issues> getAllIssues() {
 		return issuesMongoDao.findAll();
+	}
+
+	@Override
+	public Optional<Issues> getIssue(Issues issues) {
+		return issuesMongoDao.findById(issues.getId());
 	}
 
 }
