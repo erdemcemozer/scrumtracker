@@ -18,7 +18,6 @@
             <div class="pa-3">
 
                 <v-row>
-
                     <v-col cols="12" md="3" class="mb-5">
                         <v-card flat class="transparent" rounded="lg">
 
@@ -66,8 +65,8 @@
                                     </v-card>
                                 </v-hover>
                             </draggable>
-                        </v-card>
 
+                        </v-card>
                     </v-col>
 
                     <v-col cols="12" md="3" class="mb-5">
@@ -88,8 +87,8 @@
                                     </v-card>
                                 </v-hover>
                             </draggable>
-                        </v-card>
 
+                        </v-card>
                     </v-col>
 
                     <v-col cols="12" md="3" class="mb-5">
@@ -109,10 +108,9 @@
                                     </v-card>
                                 </v-hover>
                             </draggable>
+
                         </v-card>
-
                     </v-col>
-
                 </v-row>
 
             </div>
