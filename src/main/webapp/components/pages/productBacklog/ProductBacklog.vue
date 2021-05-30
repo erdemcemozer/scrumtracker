@@ -1,6 +1,5 @@
 <template>
     <v-container>
-
         <v-card flat tile color="transparent">
 
             <div class="d-flex pa-3 mb-4">
@@ -11,7 +10,7 @@
                               :label="$t('search')"
                               single-line flat rounded
                               hide-details/>
-                <product-backlog-dialog/>
+                <product-backlog-dialog :open="addDialog" :formEdit="form" @add-task="addTask($event)"/>
             </div>
 
             <v-divider/>
@@ -31,6 +30,27 @@
                     </span>
                 </template>
 
+                <template #item.action="{ item }">
+                    <div class="d-flex">
+                        <v-tooltip top>
+                            <template #activator="{ on }">
+                                <v-btn icon color="grey" v-on="on" @click="edit(item)">
+                                    <v-icon v-text="'mdi-pencil'"/>
+                                </v-btn>
+                            </template>
+                            {{ $t('edit') }}
+                        </v-tooltip>
+
+                        <v-tooltip top>
+                            <template #activator="{ on }">
+                                <v-btn icon color="grey" v-on="on" class="ml-3" @click="deleteAnnouncement(item)">
+                                    <v-icon v-text="'mdi-delete-outline'"/>
+                                </v-btn>
+                            </template>
+                            {{ $t('delete') }}
+                        </v-tooltip>
+                    </div>
+                </template>
             </v-data-table>
         </v-card>
 
@@ -49,90 +69,92 @@ export default {
         return {
             pageTitle: this.$t('productBacklog'),
             search: '',
+            addDialog: null,
+            form: null,
             headers: [
                 {
-                    text: 'Task',
+                    text: 'Title',
                     align: 'start',
                     sortable: false,
-                    value: 'tasks',
+                    value: 'issueTitle',
+                },
+                {
+                    text: 'Description',
+                    sortable: false,
+                    value: 'issueDesc',
+                },
+                {
+                    text: 'Type',
+                    sortable: false,
+                    value: 'issueType',
                 },
                 {
                     text: 'Sprint Name',
                     sortable: false,
-                    value: 'sprintName',
+                    value: 'issueSprintName',
                 },
                 {
                     text: 'Priority',
                     sortable: false,
-                    value: 'priority',
+                    value: 'issuePriority',
                 },
                 {
                     text: 'Estimation',
                     sortable: false,
-                    value: 'estimation',
+                    value: 'issueEstimation',
                 },
                 {
                     text: 'Status',
                     sortable: false,
-                    value: 'status',
+                    value: 'issueStatus',
                 },
+                {
+                    text: 'Owner',
+                    sortable: false,
+                    value: 'issueOwner',
+                },
+                {text: null, value: 'action', sortable: false, width: 20},
 
             ],
             desserts: [
                 {
-                    tasks: 'Task 1',
-                    sprintName: 'Sprint 1',
-                    priority: '1',
-                    estimation: '1',
-                    status: 'Done',
+                    issueTitle: 'Task 1',
+                    issueDesc: 'Description',
+                    issueType: 'Sprint 1',
+                    issueSprintName: 'blocker',
+                    issuePriority: 'major',
+                    issueEstimation: 'kime atandı',
+                    issueStatus: 'bug',
+                    issueOwner: 'Sadettin'
+
+                    /*issueTitle: null,
+                    issueDesc: null,
+                    issueType: null,
+                    issueSprintName: null,
+                    issuePriority: null,  // dropdown
+                    issueEstimation: null,
+                    issueStatus: null, // dropdown -> bug, story, task, feature, improvement, epic
+                    issueOwner: null // databaseden dropdown*/
 
                 },
-                {
-                    tasks: 'Task 2',
-                    sprintName: 'Sprint 1',
-                    priority: '1',
-                    estimation: '1',
-                    status: 'Done',
-
-                },
-                {
-                    tasks: 'Task 3',
-                    sprintName: 'Sprint 1',
-                    priority: '1',
-                    estimation: '1',
-                    status: 'Done',
-
-                },
-                {
-                    tasks: 'Task 4',
-                    sprintName: 'Sprint 1',
-                    priority: '1',
-                    estimation: '1',
-                    status: 'Done',
-
-                },
-                {
-                    tasks: 'Task 5',
-                    sprintName: 'Sprint 1',
-                    priority: '1',
-                    estimation: '1',
-                    status: 'Done',
-
-                },
-                {
-                    tasks: 'Task 6',
-                    sprintName: 'Sprint 1',
-                    priority: '1',
-                    estimation: '1',
-                    status: 'Done',
-
-                },
-
             ],
         }
     },
     created() {
         this.$store.commit('SET_PAGE_TITLE', this.pageTitle)
+    },
+    methods: {
+        addTask(task) {
+            this.addDialog = task
+        },
+        edit(item) {
+            this.addDialog = true
+            this.form = item
+            console.log('formm', this.form)
+        },
+        deleteAnnouncement(item) {
+            this.$store.dispatch('',item)
+        }
     }
 }
 </script>

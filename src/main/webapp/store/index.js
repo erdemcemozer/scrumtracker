@@ -7,6 +7,8 @@ export const state = ()=> ({
     announcements: null,
     sprint: null,
     meeting: null,
+    issues: null,
+    users: null
 
 })
 
@@ -38,6 +40,14 @@ export const mutations = {
 
     SET_MEETING (state, meeting){
         state.meeting = meeting
+    },
+
+    SET_ISSUE (state, issue){
+        state.issues = issue
+    },
+
+    SET_USERS (state, user){
+        state.users = user
     }
 
 }
@@ -104,55 +114,46 @@ export const actions = {
             commit('SET_SPRINT', response.data)
         })
     },
-    async POST_MEETING_RESULTS({commit}, payload) {
+
+    //################################## MEETINGS ################################################
+    async POST_MEETING_RESULTS_ADD({commit, dispatch}, payload) {
+        console.log('ddd', payload)
         await this.$axios.$post(`http://localhost:8080/meetingResults/createMeeting`,
             {
                 title: payload.title,
                 description: payload.description,
-                meetingDate: payload.meetingDate,
-                //meetingType
+                meetingDate: new Date().toISOString().slice(0, 10).split("-").reverse().join("-"),
+                meetingType: payload.type
             }
         ).then((response)=>{
-            commit('SET_MEETING', response.data)
+            dispatch('GET_MEETING_RESULTS')
         })
     },
-    async POST_MEETING_RESULTS_UPDATE({commit}, payload) {
-        await this.$axios.$post(`http://localhost:8080/meetingResults/updateMeeting`,
+    async POST_MEETING_RESULTS_UPDATE({commit, dispatch}, payload) {
+        await this.$axios.post(`http://localhost:8080/meetingResults/updateMeeting`,
             {
                 title: payload.title,
                 description: payload.description,
                 meetingDate: payload.meetingDate,
-                //meetingType
+                meetingType: payload.meetingType,
+                meetingId: payload.meetingId
             }
-        ).then((response)=>{
+        ).then(()=>{
+            dispatch('GET_MEETING_RESULTS')
+        })
+    },
+    async POST_MEETING_RESULTS_DELETE({commit,dispatch}, payload) {
+        await this.$axios.$post(`http://localhost:8080/meetingResults/deleteMeeting`,payload).then(()=>{
+            dispatch('GET_MEETING_RESULTS')
+        })
+    },
+    async GET_MEETING_RESULTS({commit}) {
+        await this.$axios.get(`http://localhost:8080/meetingResults/getMeetingResults`)
+            .then((response)=>{
             commit('SET_MEETING', response.data)
         })
     },
-    async POST_MEETING_RESULTS_DELETE({commit}, payload) {
-        await this.$axios.$post(`http://localhost:8080/meetingResults/deleteMeeting`,
-            {
-                title: payload.title,
-                description: payload.description,
-                meetingDate: payload.meetingDate,
-                //meetingType
-            }
-        ).then((response)=>{
-            commit('SET_MEETING', response.data)
-        })
-    },
-    async GET_MEETING_RESULTS_LIST({commit}, payload) {
-        // typa göre ayır
-        await this.$axios.$post(`http://localhost:8080/meetingResults/getMeetingResults`,
-            {
-                title: payload.title,
-                description: payload.description,
-                meetingDate: payload.meetingDate,
-                //meetingType
-            }
-        ).then((response)=>{
-            commit('SET_MEETING', response.data)
-        })
-    },
+    //################################## USER UPDATE ################################################
     async POST_USER_UPDATE({commit}, payload) {
         await this.$axios.$post(`http://localhost:8080/users/updateUser`,
             {
@@ -181,18 +182,10 @@ export const actions = {
             commit('SET_MEETING', response.data)
         })
     },
-    async POST_USERS ({commit}, payload) {
-        await this.$axios.$post(`http://localhost:8080/users/getUsers`,
-            {
-                name: payload.name,
-                surname: payload.surname,
-                password: payload.password,
-                phone: payload.phone,
-                email: payload.email,
-                team: payload.team
-            }
-        ).then((response)=>{
-            commit('SET_MEETING', response.data)
+    async GET_USERS ({commit}, payload) {
+        await this.$axios.get(`http://localhost:8080/users/getUsers`)
+            .then((response)=>{
+            commit('SET_USERS', response.data)
         })
     },
     async POST_CREATE_USER ({commit}, payload) {
@@ -209,6 +202,8 @@ export const actions = {
             commit('SET_MEETING', response.data)
         })
     },
+
+    //################################### ISSUES #####################################################
     async POST_CREATE_ISSUE ({commit}, payload) {
         await this.$axios.$post(`http://localhost:8080/issues/createIssue`,
             {
@@ -263,22 +258,10 @@ export const actions = {
             commit('SET_MEETING', response.data)
         })
     },
-    async GET_ISSUEs ({commit}, payload) {
-        await this.$axios.$post(`http://localhost:8080/issues/getIssues`,
-            {
-                // sabit typelar: bug, story, task, feature, improvement, epic
-                // priority: blocker, critical, major, normal, minor
-                issueTitle: payload.issueTitle,
-                issueDesc: payload.issueDesc,
-                issueType: payload.issueType,
-                issueSprintName: payload.issueSprintName,
-                issuePriority: payload.issuePriority,
-                issueEstimation: payload.issueEstimation,
-                issueStatus: payload.issueStatus,
-                issueOwner: payload.issueOwner
-            }
-        ).then((response)=>{
-            commit('SET_MEETING', response.data)
+    async GET_ISSUES ({commit}, payload) {
+        await this.$axios.get(`http://localhost:8080/issues/getIssues`)
+            .then((response)=>{
+            commit('SET_ISSUE', response.data)
         })
     },
 }
