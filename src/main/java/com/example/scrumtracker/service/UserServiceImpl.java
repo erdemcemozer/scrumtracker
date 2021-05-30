@@ -31,9 +31,13 @@ public class UserServiceImpl implements UserService {
 
 		if(!emails.contains(user.getEmail()) && !phones.contains(user.getPhone())){
 			//encrypt/decrypt operations should be here
+			user.setSignUpFlag(true);
+			user.setLoginFlag(true);
 			user.setPassword(encodePassword(user));
 			userMongoDao.save(user);
 		} else {
+			user.setSignUpFlag(false);
+			user.setLoginFlag(false);
 			System.out.println("Logger : Phone number or Email address already exists!");
 		}
 	}
