@@ -40,9 +40,11 @@ public class LoginServiceImpl implements LoginService {
 
 			if (BCrypt.checkpw(user.getPassword(), hashedPassword)) {
 				System.out.println("Logger : Log-in successfull");
+				user.setLoginFlag(true);
 				// redirect to another page
 			} else {
 				System.out.println("Logger : Log-in failed!");
+				user.setLoginFlag(false);
 			}
 		}
 
