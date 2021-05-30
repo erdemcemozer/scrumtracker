@@ -27,4 +27,5 @@ public class Users {
 	boolean signUpFlag;
 	boolean loginFlag;
 
+
 }

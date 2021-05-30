@@ -41,9 +41,6 @@ public class UserController {
 
 	}
 
-	// Overloading for different number of data's that will change.
-	// Will discuss it later.
-	// username,password
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public ResponseEntity<Users> updateUser(@RequestBody Users user) {
 
@@ -70,7 +67,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/getUsers" , method = RequestMethod.GET)
+	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
 	public List<Users> getAllUsers() {
 
 		System.out.println("Logger : Listing all users");
