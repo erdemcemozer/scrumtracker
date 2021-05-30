@@ -108,7 +108,7 @@ export default {
         formEdit: {
             default: null,
             type: Object
-        }
+        },
     },
     data(){
         return {
@@ -131,15 +131,15 @@ export default {
     methods:{
         async submit(){
 
-            /*if(this.form?.announcementId){
-                await this.$store.dispatch('POST_ANNOUNCEMENTS_UPDATE', this.form).then(()=>{
+            if(this.form?.id){
+                await this.$store.dispatch('POST_UPDATE_ISSUE', this.form).then(()=>{
                     this.$nuxt.refresh()
                 })
             }else {
-                await this.$store.dispatch('POST_ANNOUNCEMENTS_ADD', this.form).then(()=>{
+                await this.$store.dispatch('POST_CREATE_ISSUE', this.form).then(()=>{
                     this.$nuxt.refresh()
                 })
-            }*/
+            }
 
             this.$emit('add-task', false)
             this.dialog = false
@@ -163,19 +163,34 @@ export default {
 
             },
             deep: true
-        }
+        },
+       /* dialog(val) {
+            if(!val){
+                this.form = {
+                    issueTitle: null,
+                    issueDesc: null,
+                    issueType: null,
+                    issueSprintName: null,
+                    issuePriority: null,
+                    issueEstimation: null,
+                    issueStatus: null,
+                    issueOwner: null
+                }
+            }
+        }*/
     },
     async created() {
         await this.$store.dispatch('GET_USERS').then(()=>{
               console.log('users', this.$store.state.users)
                let items = this.$store.state.users
                 for(let item of items) {
-                    this.issueOwnerItems.push(item.name)
+                    this.issueOwnerItems.push(item.name + ' ' + item.surname)
                     //this.issueOwnerItems.push(item.id)
                 }
                 // console.log('issue2', this.issueOwnerItems)
             }
         )
+
     }
 }
 </script>

@@ -103,7 +103,7 @@ export default {
     watch: {
         '$store.state.announcements'(val) {
             this.desserts = [...val]
-            console.log('val',val)
+            //console.log('val',val)
             this.$nuxt.refresh()
         }
     },

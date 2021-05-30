@@ -76,7 +76,7 @@ export const registrationValidations = {
             },
             passwordAgain: {
                 required,
-                passwordAgain: sameAs('password')
+                sameAs: sameAs('password')
             }
         },
     },

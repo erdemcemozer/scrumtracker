@@ -153,6 +153,7 @@ export const actions = {
             commit('SET_MEETING', response.data)
         })
     },
+
     //################################## USER UPDATE ################################################
     async POST_USER_UPDATE({commit}, payload) {
         await this.$axios.$post(`http://localhost:8080/users/updateUser`,
@@ -162,7 +163,7 @@ export const actions = {
                 password: payload.password,
                 phone: payload.phone,
                 email: payload.email,
-                team: payload.team
+                team: 'Test'
             }
         ).then((response)=>{
             commit('SET_MEETING', response.data)
@@ -203,8 +204,8 @@ export const actions = {
         })
     },
 
-    //################################### ISSUES #####################################################
-    async POST_CREATE_ISSUE ({commit}, payload) {
+    //################################### ISSUES/PRODUCT BACKLOG #####################################################
+    async POST_CREATE_ISSUE ({commit,dispatch}, payload) {
         await this.$axios.$post(`http://localhost:8080/issues/createIssue`,
             {
                 // sabit typelar: bug, story, task, feature, improvement, epic
@@ -218,50 +219,107 @@ export const actions = {
                 issueStatus: payload.issueStatus,
                 issueOwner: payload.issueOwner
             }
-        ).then((response)=>{
-            commit('SET_MEETING', response.data)
+        ).then(()=>{
+            dispatch('GET_ISSUES')
         })
     },
-    async POST_UPDATE_ISSUE ({commit}, payload) {
-        await this.$axios.$post(`http://localhost:8080/issues/updateIssue`,
-            {
-                // sabit typelar: bug, story, task, feature, improvement, epic
-                // priority: blocker, critical, major, normal, minor
-                issueTitle: payload.issueTitle,
-                issueDesc: payload.issueDesc,
-                issueType: payload.issueType,
-                issueSprintName: payload.issueSprintName,
-                issuePriority: payload.issuePriority,
-                issueEstimation: payload.issueEstimation,
-                issueStatus: payload.issueStatus,
-                issueOwner: payload.issueOwner
-            }
-        ).then((response)=>{
-            commit('SET_MEETING', response.data)
+    async POST_UPDATE_ISSUE ({commit, dispatch}, payload) {
+        await this.$axios.$post(`http://localhost:8080/issues/updateIssue`, payload ).then(()=>{
+            dispatch('GET_ISSUES')
         })
     },
-    async POST_DELETE_ISSUE ({commit}, payload) {
-        await this.$axios.$post(`http://localhost:8080/issues/deleteIssue`,
-            {
-                // sabit typelar: bug, story, task, feature, improvement, epic
-                // priority: blocker, critical, major, normal, minor
-                issueTitle: payload.issueTitle,
-                issueDesc: payload.issueDesc,
-                issueType: payload.issueType,
-                issueSprintName: payload.issueSprintName,
-                issuePriority: payload.issuePriority,
-                issueEstimation: payload.issueEstimation,
-                issueStatus: payload.issueStatus,
-                issueOwner: payload.issueOwner
-            }
-        ).then((response)=>{
-            commit('SET_MEETING', response.data)
+    async POST_DELETE_ISSUE ({commit, dispatch}, payload) {
+        await this.$axios.$post(`http://localhost:8080/issues/deleteIssue`, payload).then(()=>{
+            dispatch('GET_ISSUES')
         })
     },
-    async GET_ISSUES ({commit}, payload) {
+    async GET_ISSUES ({commit}) {
         await this.$axios.get(`http://localhost:8080/issues/getIssues`)
             .then((response)=>{
             commit('SET_ISSUE', response.data)
         })
     },
+
+    //############################## LOGIN ###################################################################
+    async POST_LOGIN ({commit,dispatch}, payload) {
+        return await this.$axios.$post(`http://localhost:8080/login-page/login`,
+            {
+                //loginFlag
+                password: payload.password,
+                email: payload.email,
+            }
+        ).then((response)=>{
+            console.log('response:',response)
+            return true
+        }).catch((e)=>{
+            console.log('error:',e)
+            return false
+        })
+    },
+    async POST_LOGIN_REGISTER ({commit,dispatch}, payload) {
+        return await this.$axios.$post(`http://localhost:8080/users/createUser`,
+            {
+                // signUpFlag
+                name: payload.name,
+                surname: payload.surname,
+                password: payload.password,
+                phone: payload.phone,
+                email: payload.email,
+                team: 'Test'
+            }
+        ).then((response)=>{
+            console.log('response:',response)
+            return true
+        }).catch((e)=>{
+            console.log('error:',e)
+            return false
+        })
+    },
+
+    //############################### SCRUM BOARD ############################################################
+    async POST_CREATE_SPRINT({commit,dispatch}, payload) {
+        return await this.$axios.$post(`http://localhost:8080/board/createSprint`,
+            {
+                // sprintName
+                // sprintDesk
+            }
+        ).then((response)=>{
+            console.log('true',response)
+            return true
+        }).catch((e)=>{
+            console.log('error',e)
+            return false
+        })
+    },
+    async GET_LAST_SPRINT({commit,dispatch}, payload) {
+        return await this.$axios.$post(`http://localhost:8080/board/getLastSprint`,
+            {
+                //sprinName, sprintDesc,
+
+            }
+        ).then((response)=>{
+            console.log('true',response)
+            return true
+        }).catch((e)=>{
+            console.log('error',e)
+            return false
+        })
+    },
+    async GET_LAST_SPRINT_ISSUES({commit,dispatch}, payload) {
+        return await this.$axios.$post(`http://localhost:8080/board/getLastSprintIssues`,
+            {
+                // status dönecek ona göre ayır
+                //sprinName, sprintDesc,
+
+            }
+        ).then((response)=>{
+            console.log('true',response)
+            return true
+        }).catch((e)=>{
+            console.log('error',e)
+            return false
+        })
+    },
+
+    //############################## SETTINGS ###################################################
 }

@@ -65,8 +65,14 @@ export default {
     },
     methods: {
         async submit() {
-            this.$v.$touch();
-            alert("aaa")
+            this.$v.form.$touch();
+            if(!this.$v.form.$anyError) {
+                await this.$store.dispatch('POST_LOGIN', this.form).then((response) => {
+                    if(response) {
+                        this.$router.push('/sections/dash-board')
+                    }
+                })
+            }
         }
     }
 }
