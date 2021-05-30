@@ -20,7 +20,7 @@
 
                 <v-row justify="center">
                     <v-col cols="12">
-                        <v-text-field v-model="announcementTitle"
+                        <v-text-field v-model="form.announcementTitle"
                                       :label="$t('announcementTitle')+':'"
                                       outlined dense rounded required
                                       prepend-inner-icon="mdi-bullhorn-outline"/>
@@ -28,7 +28,7 @@
                     </v-col>
                     <v-col cols="12">
 
-                        <v-text-field v-model="announcementDescription"
+                        <v-text-field v-model="form.announcementDescription"
                                       :label="$t('description')+':'"
                                       outlined dense rounded required
                                       prepend-inner-icon="mdi-comment-text-outline"/>
@@ -57,34 +57,55 @@ export default {
           default: false,
           type: Boolean
       },
-        form: {
-            default: null,
+        formEdit: {
+            default: {
+                announcementTitle: null,
+                announcementDescription: null
+            },
             type: Object
         }
     },
     data(){
         return {
             dialog: false,
-            announcementTitle: null,
-            announcementDescription: null
+            form: {
+                announcementTitle: null,
+                announcementDescription: null
+            }
         }
     },
     methods:{
         async submit(){
-            const [day,month,year] = new Date().toLocaleDateString().split('.')
-            const releaseDate = `${day}-${month}-${year}`
-            await this.$store.dispatch('POST_ANNOUNCEMENTS_ADD', {announcementTitle: this.announcementTitle,
-                announcementDescription: this.announcementDescription, releaseDate}).then(()=>{
-                this.$nuxt.refresh()
-            })
+            if(this.form?.announcementId){
+                await this.$store.dispatch('POST_ANNOUNCEMENTS_UPDATE', this.form).then(()=>{
+                    this.$nuxt.refresh()
+                })
+            }else {
+                await this.$store.dispatch('POST_ANNOUNCEMENTS_ADD', this.form).then(()=>{
+                    this.$nuxt.refresh()
+                })
+            }
+
+            this.$emit('add-task', false)
             this.dialog = false
+
         },
     },
     watch:{
         open(val){
-            if(val === true || val === false){
+            if(val === true){
                 this.dialog = true
+            }else {
+                this.dialog = false
             }
+        },
+        formEdit: {
+            handler(val) {
+               this.form = {
+                   ...val
+               }
+            },
+            deep: true
         }
     },
 }

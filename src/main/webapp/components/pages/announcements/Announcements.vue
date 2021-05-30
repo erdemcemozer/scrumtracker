@@ -10,7 +10,7 @@
                               :label="$t('search')"
                               single-line flat rounded
                               hide-details/>
-                <link-dialog :open="addDialog" :form="form" @add-task="addTask($event)"/>
+                <link-dialog :open="addDialog" :formEdit="form" @add-task="addTask($event)"/>
             </div>
 
             <v-divider/>
@@ -43,7 +43,7 @@
 
                         <v-tooltip top>
                             <template #activator="{ on }">
-                                <v-btn icon color="grey" v-on="on" class="ml-3">
+                                <v-btn icon color="grey" v-on="on" class="ml-3" @click="deleteAnnouncement(item)">
                                     <v-icon v-text="'mdi-delete-outline'"/>
                                 </v-btn>
                             </template>
@@ -102,7 +102,8 @@ export default {
     },
     watch: {
         '$store.state.announcements'(val) {
-            this.desserts = val
+            this.desserts = [...val]
+            console.log('val',val)
             this.$nuxt.refresh()
         }
     },
@@ -111,8 +112,11 @@ export default {
             this.addDialog = task
         },
         edit(item) {
-            this.dialog = false
+            this.addDialog = true
             this.form = item
+        },
+        deleteAnnouncement(item) {
+            this.$store.dispatch('POST_ANNOUNCEMENTS_DELETE',item)
         }
     }
 }

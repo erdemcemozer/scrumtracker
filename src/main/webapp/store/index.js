@@ -81,15 +81,15 @@ export const actions = {
             }
         )
     },
-    async POST_ANNOUNCEMENTS_UPDATE({commit}) {
-        await this.$axios.put(`http://localhost:8080/announcements/updateAnnouncement`).then((response)=>{
+    async POST_ANNOUNCEMENTS_UPDATE({commit, dispatch},form) {
+        await this.$axios.post(`http://localhost:8080/announcements/updateAnnouncement`, form).then((response)=>{
+            dispatch('GET_ANNOUNCEMENTS')
             }
         )
     },
-    async POST_ANNOUNCEMENTS_DELETE({commit}) {
-        await this.$axios.delete(`http://localhost:8080/announcements/deleteAnnouncement`).then((response)=>{
-            commit('SET_ANNOUNCEMENTS', response.data)
-            // console.log('response', response)
+    async POST_ANNOUNCEMENTS_DELETE({commit, dispatch},payload) {
+        await this.$axios.post(`http://localhost:8080/announcements/deleteAnnouncement`,payload).then(()=>{
+            dispatch('GET_ANNOUNCEMENTS')
             }
         )
     },
