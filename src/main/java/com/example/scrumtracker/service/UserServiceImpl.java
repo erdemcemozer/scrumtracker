@@ -91,6 +91,11 @@ public class UserServiceImpl implements UserService {
 		return userMongoDao.findAll();
 	}
 
+	@Override
+	public Users getUser(Users user) {
+		return userMongoDao.findByEmail(user.getEmail());
+	}
+
 	public String encodePassword(Users user) {
 
 		String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());

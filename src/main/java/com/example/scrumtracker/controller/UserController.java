@@ -75,4 +75,13 @@ public class UserController {
 
 	}
 
+	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
+	public Users getUser(@RequestBody Users user) {
+
+		System.out.println("Logger : Listing chosen user");
+
+		return userService.getUser(user);
+
+	}
+
 }
