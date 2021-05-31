@@ -1,7 +1,5 @@
 # scrumtracker backend
 
-Bitirme projemiz hayırlı uğurlu olsun :D
-
 Trello linki : https://trello.com/b/ddcUpIx0/ara%C5%9Ft%C4%B1rma-problemleri
 
 ## Proje Detayları
@@ -15,3 +13,11 @@ Trello linki : https://trello.com/b/ddcUpIx0/ara%C5%9Ft%C4%B1rma-problemleri
 - openjdk-15 intellij ile birlikte indirilebiliyor, rahat bir şekilde import edilebilir.
 
 - vue.js için yine plugini indirilmeli.
+
+## Projeyi çalıştırmak için
+
+- Projeyi indirdikten sonra gradle build yapılmalı
+- Console'dan npm install ile vue.js için gerekli olan node'lar yüklenmeli
+- Daha sonra Java Server'i ve Vue.js projesi çalıştırılmalı
+- localhost:3000 üzerinden proje çalışmaktadır
+- Eğer isterseniz application.properties dosyasına kendi mongodb url'inizi yazarak kendi local database'inize de bağlayabilirsiniz
