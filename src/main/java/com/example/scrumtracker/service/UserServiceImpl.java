@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	List<String> phones;
 
 	@Override
-	public void createUser(Users user) {
+	public boolean createUser(Users user) {
 
 		emails = new ArrayList<>(getAllUsers().size());
 		getEmails(emails);
@@ -30,16 +30,14 @@ public class UserServiceImpl implements UserService {
 		getPhones(phones);
 
 		if (!emails.contains(user.getEmail()) && !phones.contains(user.getPhone())) {
-			// encrypt/decrypt operations should be here
-			user.setSignUpFlag(true);
-			user.setLoginFlag(true);
 			user.setPassword(encodePassword(user));
 			userMongoDao.save(user);
+			return true;
 		} else {
-			user.setSignUpFlag(false);
-			user.setLoginFlag(false);
 			System.out.println("Logger : Phone number or Email address already exists!");
+			return false;
 		}
+
 	}
 
 	@Override

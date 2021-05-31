@@ -4,8 +4,6 @@ import com.example.scrumtracker.model.Users;
 import com.example.scrumtracker.service.LoginService;
 import com.example.scrumtracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,15 +24,14 @@ public class LoginController {
 	private LoginService loginService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<Users> login(@RequestBody Users user) {
+	public boolean login(@RequestBody Users user) {
 
 		System.out.println("Logger : Login controller create.");
 
 		if (!ObjectUtils.isEmpty(user)) {
-			loginService.login(getUser(user.getEmail(), user.getPassword()));
-			return new ResponseEntity<>(HttpStatus.OK);
+			return loginService.login(getUser(user.getEmail(), user.getPassword()));
 		} else {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return false;
 		}
 	}
 

@@ -26,7 +26,9 @@ public class LoginServiceImpl implements LoginService {
 	List<String> emails;
 
 	@Override
-	public void login(Users user) {
+	public boolean login(Users user) {
+
+		boolean flag = false;
 
 		passwords = new ArrayList<>(userService.getAllUsers().size());
 		getPasswords(passwords);
@@ -40,14 +42,14 @@ public class LoginServiceImpl implements LoginService {
 
 			if (BCrypt.checkpw(user.getPassword(), hashedPassword)) {
 				System.out.println("Logger : Log-in successfull");
-				user.setLoginFlag(true);
-				// redirect to another page
+				flag = true;
 			} else {
 				System.out.println("Logger : Log-in failed!");
-				user.setLoginFlag(false);
+				flag = false;
 			}
 		}
 
+		return flag;
 	}
 
 	public void getPasswords(List<String> passwords) {

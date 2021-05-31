@@ -24,7 +24,7 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
-	public ResponseEntity<Users> createUser(@RequestBody Users user) {
+	public boolean createUser(@RequestBody Users user) {
 
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString();
@@ -32,10 +32,9 @@ public class UserController {
 
 		System.out.println("Logger : User controller create.");
 		if (!ObjectUtils.isEmpty(user)) {
-			userService.createUser(user);
-			return new ResponseEntity<>(HttpStatus.OK);
+			return userService.createUser(user);
 		} else {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return false;
 		}
 
 	}
@@ -66,7 +65,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/getUsers" , method = RequestMethod.GET)
+	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
 	public List<Users> getAllUsers() {
 
 		System.out.println("Logger : Listing all users");

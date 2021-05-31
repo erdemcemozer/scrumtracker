@@ -24,7 +24,5 @@ public class Users {
 	String phone;
 	String email;
 	String team;
-	boolean signUpFlag;
-	boolean loginFlag;
 
 }
