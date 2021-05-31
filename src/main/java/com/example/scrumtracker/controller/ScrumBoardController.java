@@ -42,7 +42,7 @@ public class ScrumBoardController {
 		}
 	}
 
-	@RequestMapping(value = "/getLastSprintIssues", method = RequestMethod.GET)
+	@RequestMapping(value = "/getLastSprintIssues", method = RequestMethod.POST)
 	public List<Issues> getLastSprintIssues(@RequestBody Sprints sprints) {
 		List<Issues> lastIssues = null;
 		List<Issues> issuesList = issuesService.getAllIssues();
