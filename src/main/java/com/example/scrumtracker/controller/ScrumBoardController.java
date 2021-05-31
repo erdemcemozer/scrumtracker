@@ -103,6 +103,11 @@ public class ScrumBoardController {
 		}
 	}
 
+	@RequestMapping(value = "/getSprints", method = RequestMethod.GET)
+	public List<Sprints> getAllSprints(){
+		return sprintsService.getAllSprints();
+	}
+
 	private Integer getTotalIssue(Sprints sprints) {
 		List<Issues> issuesList = issuesService.getAllIssues();
 		Integer totalIssue = 0;
