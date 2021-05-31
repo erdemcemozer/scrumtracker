@@ -111,6 +111,7 @@ export default {
                 await this.$store.dispatch('POST_LOGIN_REGISTER', this.form).then((response) => {
                     if(response) {
                         this.$router.push('/account/login')
+
                     }
                 })
             }

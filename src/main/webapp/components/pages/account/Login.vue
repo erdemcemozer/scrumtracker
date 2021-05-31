@@ -69,6 +69,10 @@ export default {
             if(!this.$v.form.$anyError) {
                 await this.$store.dispatch('POST_LOGIN', this.form).then((response) => {
                     if(response) {
+                        this.$storage.setCookie('email',this.form.email)
+                        this.$storage.setCookie('password',this.form.password)
+                        this.$store.dispatch('POST_PROFILE_LOGIN')
+                        console.log("res",response)
                         this.$router.push('/sections/dash-board')
                     }
                 })

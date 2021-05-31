@@ -39,8 +39,8 @@
 
                         <v-col cols="12" sm="6">
                             <v-text-field v-model="form.email"
-                                          :label="$t('email')"
-                                          outlined dense rounded
+                                          :label=" $t('email') "
+                                          outlined dense rounded disabled
                                           type="email" required
                                           prepend-inner-icon="mdi-email-outline"
                                           :error-messages="emailErrors"
@@ -105,7 +105,7 @@ export default {
             form: {
                 name: null,
                 surname: null,
-                email: null,
+                email: this.$storage.getCookie('email')?this.$storage.getCookie('email'):null,
                 phone: null,
                 password: null,
                 passwordAgain: null,

@@ -155,7 +155,15 @@ export const actions = {
     },
 
     //################################## USER UPDATE ################################################
-    async POST_USER_UPDATE({commit}, payload) {
+    async POST_PROFILE_LOGIN({commit}, payload) {
+        let email=this.$storage.getCookie('email')
+        console.log("email",email)
+        await this.$axios.get(`http://localhost:8080/users/getUser`, email).then((response)=>{
+            console.log("response login",response)
+            //commit('SET_MEETING', response.data)
+        })
+    },
+    async GET_PROFILE_INFOS({commit}, payload) {
         await this.$axios.$post(`http://localhost:8080/users/updateUser`,
             {
                 name: payload.name,
@@ -250,10 +258,7 @@ export const actions = {
             }
         ).then((response)=>{
             console.log('response:',response)
-            return true
-        }).catch((e)=>{
-            console.log('error:',e)
-            return false
+            return response
         })
     },
     async POST_LOGIN_REGISTER ({commit,dispatch}, payload) {
@@ -269,10 +274,7 @@ export const actions = {
             }
         ).then((response)=>{
             console.log('response:',response)
-            return true
-        }).catch((e)=>{
-            console.log('error:',e)
-            return false
+            return response
         })
     },
 
