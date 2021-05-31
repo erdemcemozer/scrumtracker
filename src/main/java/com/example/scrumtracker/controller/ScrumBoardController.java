@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,8 +45,8 @@ public class ScrumBoardController {
 
 	@RequestMapping(value = "/getLastSprintIssues", method = RequestMethod.POST)
 	public List<Issues> getLastSprintIssues(@RequestBody Sprints sprints) {
-		List<Issues> lastIssues = null;
 		List<Issues> issuesList = issuesService.getAllIssues();
+		List<Issues> lastIssues = new ArrayList<>(issuesList.size());
 
 		for (Issues issue : issuesList) {
 			if (issue.getIssueSprintName().equals(sprints.getSprintName())) {
