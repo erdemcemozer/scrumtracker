@@ -75,7 +75,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/getUser", method = RequestMethod.POST)
 	public Users getUser(@RequestBody Users user) {
 
 		System.out.println("Logger : Listing chosen user");
