@@ -9,7 +9,8 @@ export const state = ()=> ({
     meeting: null,
     issues: null,
     users: null,
-    profileInfo: null
+    profileInfo: null,
+    allSprints: null
 
 })
 
@@ -53,6 +54,10 @@ export const mutations = {
 
     SET_PROFILE_INFO(state,profileInfo){
         state.profileInfo = profileInfo
+    },
+
+    SET_ALL_SPRINTS(state,allSprints) {
+        state.allSprints = allSprints
     }
 
 }
@@ -286,16 +291,10 @@ export const actions = {
         })
     },
     async GET_LAST_SPRINT({commit,dispatch}, payload) {
-        return await this.$axios.$post(`http://localhost:8080/board/getLastSprint`,
-            {
-                //sprinName, sprintDesc,
-            }
-        ).then((response)=>{
-            console.log('true',response)
-            return true
+        await this.$axios.get(`http://localhost:8080/board/getLastSprint`,).then((response)=>{
+            console.log('last sprint',response)
         }).catch((e)=>{
             console.log('error',e)
-            return false
         })
     },
     async GET_LAST_SPRINT_ISSUES({commit,dispatch}, payload) {
@@ -327,18 +326,19 @@ export const actions = {
             return false
         })
     },
-    async GET_ALL_SPRINTS({commit,dispatch}, payload) {
-        return await this.$axios.$post(`http://localhost:8080/board/getSprints`,
-            {
-                // status dönecek ona göre ayır
-                //sprinName, sprintDesc,
-            }
-        ).then((response)=>{
-            console.log('true',response)
-            return true
+    async GET_ALL_SPRINTS({commit}) {
+        await this.$axios.get(`http://localhost:8080/board/getSprints`).then((response)=>{
+            commit('SET_ALL_SPRINTS',response.data)
         }).catch((e)=>{
             console.log('error',e)
-            return false
+        })
+    },
+    async GET_SPRINT_ISSUES({commit}) {
+        // isim gönder
+        await this.$axios.post(`http://localhost:8080/board/getLastSprintIssues=id`).then((response)=>{
+            commit('SET_ALL_SPRINTS',response.data)
+        }).catch((e)=>{
+            console.log('error',e)
         })
     },
 

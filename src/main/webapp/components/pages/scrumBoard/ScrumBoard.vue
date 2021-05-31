@@ -15,10 +15,13 @@
 
                 <v-col cols="2" class="pa-2">
                     <v-select
-                        :items="sprints"
-                        label="Sprints"
-                        dense
-                    ></v-select>
+                        v-model="select"
+                        :items="items"
+                        item-text="sprintName"
+                        item-value="sprintId"
+                        return-object
+                        single-line
+                    />
                 </v-col>
 
                 <v-col cols="2" class="pa-2">
@@ -149,7 +152,8 @@ export default {
     },
     data() {
         return {
-            sprints: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+            select: {},
+            items: [],
             pageTitle: this.$t('scrumBoard'),
             openTasks: [
                 {
@@ -188,6 +192,17 @@ export default {
     },
     created() {
         this.$store.commit('SET_PAGE_TITLE', this.pageTitle)
+        this.$store.dispatch('GET_ALL_SPRINTS').then(()=>{
+            this.items = this.$store.state.allSprints
+            this.select = this.$store.state.allSprints[this.$store.state.allSprints.length-1]
+        })
+        this.$store.dispatch('GET_LAST_SPRINT')
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.v-text-field {
+    padding-top: initial;
+}
+</style>
