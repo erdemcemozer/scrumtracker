@@ -158,7 +158,7 @@ export const actions = {
     async POST_PROFILE_LOGIN({commit}, payload) {
         let email=this.$storage.getCookie('email')
         console.log("email",email)
-        await this.$axios.get(`http://localhost:8080/users/getUser`, email).then((response)=>{
+        await this.$axios.post(`http://localhost:8080/users/getUser`, email).then((response)=>{
             console.log("response login",response)
             //commit('SET_MEETING', response.data)
         })
