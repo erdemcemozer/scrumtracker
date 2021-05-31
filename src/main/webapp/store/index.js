@@ -10,7 +10,8 @@ export const state = ()=> ({
     issues: null,
     users: null,
     profileInfo: null,
-    allSprints: null
+    allSprints: null,
+    selectedIssue: null
 
 })
 
@@ -58,7 +59,11 @@ export const mutations = {
 
     SET_ALL_SPRINTS(state,allSprints) {
         state.allSprints = allSprints
-    }
+    },
+
+    SET_SELECTED_ISSUE(state,selectedIssue) {
+        state.selectedIssue = selectedIssue
+    },
 
 }
 
@@ -285,6 +290,7 @@ export const actions = {
         await this.$axios.$post(`http://localhost:8080/board/createSprint`,
             {...payload}
         ).then(()=>{
+            dispatch('GET_ALL_SPRINTS')
             console.log('sprint created')
         }).catch((e)=>{
             console.log('error',e)
@@ -333,10 +339,11 @@ export const actions = {
             console.log('error',e)
         })
     },
-    async GET_SPRINT_ISSUES({commit}) {
+    async GET_SELECTED_ISSUE({commit}, payload) {
         // isim gönder
-        await this.$axios.post(`http://localhost:8080/board/getLastSprintIssues=id`).then((response)=>{
-            commit('SET_ALL_SPRINTS',response.data)
+        await this.$axios.post(`http://localhost:8080/board/getLastSprintIssues`, {payload}).then((response)=>{
+            //console.log('ssss',response)
+            commit('SET_SELECTED_ISSUE',response.data)
         }).catch((e)=>{
             console.log('error',e)
         })

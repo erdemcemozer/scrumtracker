@@ -21,6 +21,7 @@
                         item-value="sprintId"
                         return-object
                         single-line
+                        @change="changeSelect(select)"
                     />
                 </v-col>
 
@@ -189,15 +190,34 @@ export default {
                 this.$delete(this.openTasks, i)
             }
         },
+        changeSelect(select) {
+            //this.$storage.setCookie('sprintName', select.sprintName)
+        }
     },
     created() {
         this.$store.commit('SET_PAGE_TITLE', this.pageTitle)
         this.$store.dispatch('GET_ALL_SPRINTS').then(()=>{
             this.items = this.$store.state.allSprints
             this.select = this.$store.state.allSprints[this.$store.state.allSprints.length-1]
+            this.$storage.setCookie('sprintName', this.select.sprintName)
+            this.$store.dispatch('GET_SELECTED_ISSUE', 'spr demo 2')
         })
         this.$store.dispatch('GET_LAST_SPRINT')
-    }
+    },
+    watch: {
+        '$store.state.allSprints'(val) {
+            this.items = [...val]
+            this.$nuxt.refresh()
+        },
+        select: {
+            handler(val){
+                this.$storage.removeCookie('sprintName')
+                this.$storage.setCookie('sprintName', val.sprintName)
+                console.log('aaaa',val)
+            },
+            deep: true
+        }
+    },
 }
 </script>
 

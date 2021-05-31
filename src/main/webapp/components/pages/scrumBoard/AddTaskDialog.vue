@@ -3,6 +3,8 @@
 
         <v-card class="pa-10">
 
+            {{sprint}}
+
             <h3 class="mb-6 text-center" v-text="$t('addAnnouncementTitle')"/>
 
             <v-row justify="center">
@@ -48,7 +50,8 @@ export default {
             form:{
                 title: null,
                 description: null
-            }
+            },
+            sprint: this.$storage.getCookie('sprintName')
         }
     },
     watch:{

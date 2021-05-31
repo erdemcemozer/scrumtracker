@@ -49,7 +49,7 @@ export default {
             dialog: false,
             form: {
                 sprintName: null,
-                sprintDesc: null
+                sprintDesc: null,
             }
         }
     },
@@ -58,6 +58,6 @@ export default {
             this.dialog = false
             await this.$store.dispatch('POST_CREATE_SPRINT',this.form)
         }
-    }
+    },
 }
 </script>
