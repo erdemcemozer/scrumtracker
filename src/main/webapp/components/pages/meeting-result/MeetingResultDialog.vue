@@ -9,15 +9,15 @@
                 <v-row justify="center">
                     <v-col cols="12">
                         <v-text-field v-model="form.title"
-                                      :label="$t('announcementTitle')+':'"
+                                      :label="$t('addTitle')+':'"
                                       outlined dense rounded required
-                                      prepend-inner-icon="mdi-bullhorn-outline"/>
+                                      prepend-inner-icon="mdi-format-title"/>
 
                     </v-col>
                     <v-col cols="12">
 
                         <v-text-field v-model="form.description"
-                                      :label="$t('description')+':'"
+                                      :label="$t('addDescription')+':'"
                                       outlined dense rounded required
                                       prepend-inner-icon="mdi-comment-text-outline"/>
 

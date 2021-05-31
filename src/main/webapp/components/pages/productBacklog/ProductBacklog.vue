@@ -72,43 +72,43 @@ export default {
             form: null,
             headers: [
                 {
-                    text: 'Title',
+                    text: this.$t('title'),
                     align: 'start',
                     sortable: false,
                     value: 'issueTitle',
                 },
                 {
-                    text: 'Description',
+                    text: this.$t('description'),
                     sortable: false,
                     value: 'issueDesc',
                 },
                 {
-                    text: 'Type',
+                    text: this.$t('type'),
                     sortable: false,
                     value: 'issueType',
                 },
                 {
-                    text: 'Sprint Name',
+                    text: this.$t('sprintName'),
                     sortable: false,
                     value: 'issueSprintName',
                 },
                 {
-                    text: 'Priority',
+                    text: this.$t('priority'),
                     sortable: false,
                     value: 'issuePriority',
                 },
                 {
-                    text: 'Estimation',
+                    text: this.$t('estimation'),
                     sortable: false,
                     value: 'issueEstimation',
                 },
                 {
-                    text: 'Status',
+                    text: this.$t('status'),
                     sortable: false,
                     value: 'issueStatus',
                 },
                 {
-                    text: 'Owner',
+                    text: this.$t('owner'),
                     sortable: false,
                     value: 'issueOwner',
                 },

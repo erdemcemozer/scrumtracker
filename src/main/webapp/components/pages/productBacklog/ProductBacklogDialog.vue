@@ -8,44 +8,44 @@
                        v-bind="attrs"
                        v-on="on">
 
-                    <v-icon v-text="'mdi-bullhorn-outline'" class="mr-2"/>
-                    {{ $t('addAnnouncement') }}
+                    <v-icon v-text="'mdi-flag-plus-outline'" class="mr-2"/>
+                    {{ $t('addIssue') }}
                 </v-btn>
 
             </template>
 
             <v-card class="pa-10">
 
-                <h3 class="mb-6 text-center" v-text="$t('addAnnouncementTitle')"/>
+                <h3 class="mb-6 text-center" v-text="$t('pleaseAddNecessaryInformation')"/>
 
                 <v-row justify="center">
 
                     <v-col cols="12">
                         <v-text-field v-model="form.issueTitle"
-                                      :label="$t('announcementTitle')+':'"
+                                      :label="$t('title')+':'"
                                       outlined dense rounded required
-                                      prepend-inner-icon="mdi-bullhorn-outline"/>
+                                      prepend-inner-icon="mdi-format-title"/>
                     </v-col>
 
                     <v-col cols="12">
                         <v-text-field v-model="form.issueDesc"
                                       :label="$t('description')+':'"
                                       outlined dense rounded required
-                                      prepend-inner-icon="mdi-bullhorn-outline"/>
+                                      prepend-inner-icon="mdi-comment-text-outline"/>
                     </v-col>
 
                     <v-col cols="12">
                         <v-text-field v-model="form.issueType"
                                       :label="$t('issueType')+':'"
                                       outlined dense rounded required
-                                      prepend-inner-icon="mdi-comment-text-outline"/>
+                                      prepend-inner-icon="mdi-format-list-bulleted-type"/>
                     </v-col>
 
                     <v-col cols="12">
                         <v-text-field v-model="form.issueSprintName"
-                                      :label="$t('issueSprintName')+':'"
+                                      :label="$t('sprintName')+':'"
                                       outlined dense rounded required
-                                      prepend-inner-icon="mdi-comment-text-outline"/>
+                                      prepend-inner-icon="mdi-alpha-n-box-outline"/>
                     </v-col>
 
                     <v-col cols="12">
@@ -53,15 +53,15 @@
                             v-model="form.issuePriority"
                             :items="issuePriorityItems"
                             outlined dense rounded
-                            label="Issue Priority"
-                        />
+                            :label="$t('priority')+':'"
+                            prepend-inner-icon="mdi-priority-high"/>
                     </v-col>
 
                     <v-col cols="12">
                         <v-text-field v-model="form.issueEstimation"
-                                      :label="$t('issueType')+':'"
+                                      :label="$t('estimation')+':'"
                                       outlined dense rounded required
-                                      prepend-inner-icon="mdi-comment-text-outline"/>
+                                      prepend-inner-icon="mdi-counter"/>
                     </v-col>
 
                     <v-col cols="12">
@@ -69,8 +69,8 @@
                             v-model="form.issueStatus"
                             :items="issueStatusItems"
                             outlined dense rounded
-                            label="Issue Status"
-                        />
+                            :label="$t('status')+':'"
+                            prepend-inner-icon="mdi-list-status"/>
                     </v-col>
 
                     <v-col cols="12">
@@ -78,8 +78,8 @@
                             v-model="form.issueOwner"
                             :items="issueOwnerItems"
                             outlined dense rounded
-                            label="Issue Owner"
-                        />
+                            :label="$t('owner')+':'"
+                            prepend-inner-icon="mdi-account-question-outline" />
                     </v-col>
 
 
@@ -124,7 +124,7 @@ export default {
                 issueOwner: null // databaseden dropdown
             },
             issueStatusItems: ['bug', 'story', 'task', 'feature', 'improvement', 'epic'],
-            issuePriorityItems: ['blocker', 'critical', 'major', 'normal', 'minor'],
+            issuePriorityItems: [this.$t('blocker'), this.$t('critical'), this.$t('major'), this.$t('normal'), this.$t('minor')],
             issueOwnerItems: []
         }
     },

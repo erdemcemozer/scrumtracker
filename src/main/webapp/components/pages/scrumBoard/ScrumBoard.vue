@@ -22,7 +22,7 @@
                         <v-card flat class="transparent" rounded="lg">
 
                             <div class="white d-flex align-center justify-space-between pr-2">
-                                <v-card-title v-text="'Open/Reopen'" class="py-2"/>
+                                <v-card-title v-text="$t('openReopen')" class="py-2"/>
 
                                 <v-btn icon @click="addDialog = !addDialog">
                                     <v-icon v-text="'mdi-plus-circle-outline'"/>
@@ -49,7 +49,7 @@
 
                     <v-col cols="12" md="3" class="mb-5">
                         <v-card flat class="transparent" rounded="lg">
-                            <v-card-title v-text="'In Progress'" class="white py-2"/>
+                            <v-card-title v-text="$t('inProgress')" class="white py-2"/>
 
                             <draggable :list="inProgressTasks" group="people" style="min-height: 50px">
                                 <v-hover v-slot="{ hover }" v-for="(task, i) in inProgressTasks"
@@ -71,7 +71,7 @@
 
                     <v-col cols="12" md="3" class="mb-5">
                         <v-card flat class="transparent" rounded="lg">
-                            <v-card-title v-text="'In Test'" class="white py-2"/>
+                            <v-card-title v-text="$t('inTest')" class="white py-2"/>
 
                             <draggable :list="inTestTasks" group="people" style="min-height: 50px">
                                 <v-hover v-slot="{ hover }" v-for="(task, i) in inTestTasks"
@@ -93,7 +93,7 @@
 
                     <v-col cols="12" md="3" class="mb-5">
                         <v-card flat class="transparent" rounded="lg">
-                            <v-card-title v-text="'Done'" class="white py-2"/>
+                            <v-card-title v-text="$t('done')" class="white py-2"/>
 
                             <draggable :list="doneTasks" group="people" style="min-height: 50px">
                                 <v-hover v-slot="{ hover }" v-for="(task, i) in doneTasks" :key="`${task.title}-${i}`">

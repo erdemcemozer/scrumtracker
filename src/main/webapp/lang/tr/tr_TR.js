@@ -43,6 +43,38 @@ export default {
     dashBoard                           : "Gösterge Paneli",
     productBacklog                      : "Ürün Özellikleri",
     scrumBoard                          : "Scrum Tahtası",
+    edit                                : "düzenle",
+    delete                              : "sil",
+    date                                : "Tarih",
+    addTitle                            : "Başlık Ekle",
+    addDescription                      : "Açıklama Ekle",
+    review                              : "Değerlendirme",
+    retrospective                       : "Retrospektif",
+    addIssue                            : "İş Ekle",
+    type                                : "Türü",
+    sprintName                          : "Sprint Adı",
+    priority                            : "Öncelik",
+    estimation                          : "Puanı",
+    status                              : "Statüsü",
+    owner                               : "Üstlenen",
+    bug                                 : "İşlev Bozukluğu",
+    blocker                             : "yüksek öncelikli",
+    critical                            : "kritik",
+    major                               : "öncelikli",
+    normal                              : "normal",
+    minor                               : "düşük öncelikli",
+    pleaseAddNecessaryInformation       : "Lütfen Gerekli Alanları Doldurun",
+    issueType                           : "İş Türü",
+    openReopen                          : "Aktif",
+    inProgress                          : "Yapılıyor",
+    inTest                              : "Testte",
+    done                                : "Tamamlanan",
+
+
+
+
+
+
 
 
 }

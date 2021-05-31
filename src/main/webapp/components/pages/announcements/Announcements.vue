@@ -1,8 +1,8 @@
 <template>
     <v-container>
-        <v-card rounded="lg" color="transparent" class="neumerophism">
+        <v-card rounded="lg" color="transparent" flat tile>
 
-            <div class="d-flex pa-3">
+            <div class="d-flex pa-3 mb-2">
                 <v-text-field color="transparent"
                               class="neumerophism py-1 mt-0 fill-width mr-3"
                               v-model="search"
@@ -84,7 +84,7 @@ export default {
                     value: 'announcementDescription',
                 },
                 {
-                    text: "Date",
+                    text: this.$t('date'),
                     sortable: false,
                     value: 'releaseDate',
                 },

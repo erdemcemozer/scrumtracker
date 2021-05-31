@@ -6,7 +6,7 @@
                     <v-card tile flat color="transparent">
                         <v-row>
                             <v-col cols="12" class="d-flex justify-space-between align-center pt-2 px-10">
-                                <h4 class="text-h6">Review</h4>
+                                <h4 class="text-h6">{{ $t('review') }}</h4>
                                 <v-btn icon @click="addResult('review')">
                                     <v-icon size="30" v-text="'mdi-plus-circle-outline'"/>
                                 </v-btn>
@@ -45,7 +45,7 @@
                     <v-card tile flat color="transparent">
                         <v-row>
                             <v-col cols="12" class="d-flex justify-space-between align-center pt-2 px-10">
-                                <h4 class="text-h6">Retrospective</h4>
+                                <h4 class="text-h6">{{ $t('retrospective') }}</h4>
                                 <v-btn icon @click="addResult('retrospective')">
                                     <v-icon size="30" v-text="'mdi-plus-circle-outline'"/>
                                 </v-btn>

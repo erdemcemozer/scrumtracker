@@ -8,7 +8,8 @@
             <v-card-text class="d-flex justify-space-start align-center my-10">
 
                 <v-list-item-avatar size="72">
-                    <v-img src="https://avatars.githubusercontent.com/u/53340224?s=460&u=baa02bb677c9c08b8806f65f942a2e56eb30dd9a&v=4"/>
+                    <!--<v-img src="https://avatars.githubusercontent.com/u/53340224?s=460&u=baa02bb677c9c08b8806f65f942a2e56eb30dd9a&v=4"/> -->
+                    <v-img src="https://www.technobezz.com/files/uploads/2021/02/X462YQ4HIJEGHHX2I3LXRV4G7A.jpg"/>
                 </v-list-item-avatar>
 
                     <nuxt-link to="/" class="ml-3 text-capitalize" v-text="$t('changePhoto')"/>
