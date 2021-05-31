@@ -1,7 +1,7 @@
 <template>
     <v-list rounded flat class="py-4">
 
-        <v-tooltip right nudge-right="10">
+      <!--  <v-tooltip right nudge-right="10">
             <template #activator="{ on, attrs }">
                 <v-list-item :to="localePath('index', $i18n.locale)"
                              active-class="primary--text" exact
@@ -17,7 +17,7 @@
             </template>
             {{ $t('homePage') }}
         </v-tooltip>
-
+-->
         <template v-for="(section, s) in navSections">
 
             <v-tooltip right nudge-right="10"

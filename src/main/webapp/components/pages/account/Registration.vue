@@ -106,6 +106,14 @@ export default {
     methods: {
         async submit() {
             this.$v.form.$touch();
+
+            if(!this.$v.form.$anyError) {
+                await this.$store.dispatch('POST_LOGIN_REGISTER', this.form).then((response) => {
+                    if(response) {
+                        this.$router.push('/account/login')
+                    }
+                })
+            }
         }
     }
 }

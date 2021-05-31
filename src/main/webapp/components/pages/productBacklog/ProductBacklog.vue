@@ -1,7 +1,6 @@
 <template>
     <v-container>
         <v-card flat tile color="transparent">
-
             <div class="d-flex pa-3 mb-4">
                 <v-text-field color="transparent"
                               class="neumerophism py-1 mt-0 fill-width mr-3"
@@ -43,7 +42,7 @@
 
                         <v-tooltip top>
                             <template #activator="{ on }">
-                                <v-btn icon color="grey" v-on="on" class="ml-3" @click="deleteAnnouncement(item)">
+                                <v-btn icon color="grey" v-on="on" class="ml-3" @click="deleteIssue(item)">
                                     <v-icon v-text="'mdi-delete-outline'"/>
                                 </v-btn>
                             </template>
@@ -118,7 +117,7 @@ export default {
             ],
             desserts: [
                 {
-                    issueTitle: 'Task 1',
+                    /*issueTitle: 'Task 1',
                     issueDesc: 'Description',
                     issueType: 'Sprint 1',
                     issueSprintName: 'blocker',
@@ -127,7 +126,7 @@ export default {
                     issueStatus: 'bug',
                     issueOwner: 'Sadettin'
 
-                    /*issueTitle: null,
+                    issueTitle: null,
                     issueDesc: null,
                     issueType: null,
                     issueSprintName: null,
@@ -140,8 +139,19 @@ export default {
             ],
         }
     },
-    created() {
+    async created() {
         this.$store.commit('SET_PAGE_TITLE', this.pageTitle)
+        await this.$store.dispatch('GET_ISSUES').then(()=>{
+                this.desserts = this.$store.state.issues
+            }
+        )
+    },
+    watch: {
+        '$store.state.issues'(val) {
+            this.desserts = [...val]
+            console.log('val111',val)
+            this.$nuxt.refresh()
+        }
     },
     methods: {
         addTask(task) {
@@ -150,10 +160,10 @@ export default {
         edit(item) {
             this.addDialog = true
             this.form = item
-            console.log('formm', this.form)
+            //console.log('formm', this.form)
         },
-        deleteAnnouncement(item) {
-            this.$store.dispatch('',item)
+        deleteIssue(item) {
+            this.$store.dispatch('POST_DELETE_ISSUE', item)
         }
     }
 }
