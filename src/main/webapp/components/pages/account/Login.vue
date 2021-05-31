@@ -73,7 +73,7 @@ export default {
                         this.$storage.setCookie('password',this.form.password)
                         this.$store.dispatch('POST_PROFILE_LOGIN')
                         console.log("res",response)
-                        this.$router.push('/sections/dash-board')
+                        //this.$router.push('/sections/dash-board')
                     }
                 })
             }

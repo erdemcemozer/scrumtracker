@@ -8,7 +8,8 @@ export const state = ()=> ({
     sprint: null,
     meeting: null,
     issues: null,
-    users: null
+    users: null,
+    profileInfo: null
 
 })
 
@@ -48,6 +49,10 @@ export const mutations = {
 
     SET_USERS (state, user){
         state.users = user
+    },
+
+    SET_PROFILE_INFO(state,profileInfo){
+        state.profileInfo = profileInfo
     }
 
 }
@@ -157,25 +162,17 @@ export const actions = {
     //################################## USER UPDATE ################################################
     async POST_PROFILE_LOGIN({commit}, payload) {
         let email=this.$storage.getCookie('email')
-        console.log("email",email)
-        await this.$axios.post(`http://localhost:8080/users/getUser`, email).then((response)=>{
-            console.log("response login",response)
-            //commit('SET_MEETING', response.data)
+        await this.$axios.post(`http://localhost:8080/users/getUser`, {email}).then((response)=>{
+            commit('SET_PROFILE_INFO', response.data)
         })
     },
-    async GET_PROFILE_INFOS({commit}, payload) {
-        await this.$axios.$post(`http://localhost:8080/users/updateUser`,
-            {
-                name: payload.name,
-                surname: payload.surname,
-                password: payload.password,
-                phone: payload.phone,
-                email: payload.email,
-                team: 'Test'
-            }
-        ).then((response)=>{
-            commit('SET_MEETING', response.data)
-        })
+    async POST_PROFILE_UPDATE({commit,dispatch}, payload) {
+        await this.$axios.$post(`http://localhost:8080/users/updateUser`, {...payload})
+            .then((res)=>{
+            dispatch('POST_PROFILE_LOGIN')
+        }).catch((e)=>{
+                console.log("error",e)
+            })
     },
     async POST_USER_DELETE({commit}, payload) {
         await this.$axios.$post(`http://localhost:8080/users/deleteUser`,
@@ -280,24 +277,18 @@ export const actions = {
 
     //############################### SCRUM BOARD ############################################################
     async POST_CREATE_SPRINT({commit,dispatch}, payload) {
-        return await this.$axios.$post(`http://localhost:8080/board/createSprint`,
-            {
-                // sprintName
-                // sprintDesk
-            }
-        ).then((response)=>{
-            console.log('true',response)
-            return true
+        await this.$axios.$post(`http://localhost:8080/board/createSprint`,
+            {...payload}
+        ).then(()=>{
+            console.log('sprint created')
         }).catch((e)=>{
             console.log('error',e)
-            return false
         })
     },
     async GET_LAST_SPRINT({commit,dispatch}, payload) {
         return await this.$axios.$post(`http://localhost:8080/board/getLastSprint`,
             {
                 //sprinName, sprintDesc,
-
             }
         ).then((response)=>{
             console.log('true',response)
@@ -312,7 +303,35 @@ export const actions = {
             {
                 // status dönecek ona göre ayır
                 //sprinName, sprintDesc,
-
+            }
+        ).then((response)=>{
+            console.log('true',response)
+            return true
+        }).catch((e)=>{
+            console.log('error',e)
+            return false
+        })
+    },
+    async GET_SELECTED_SPRINT({commit,dispatch}, payload) {
+        return await this.$axios.$post(`http://localhost:8080/board/getSprint`,
+            {
+                // idye göre döncez
+                // status dönecek ona göre ayır
+                //sprinName, sprintDesc,
+            }
+        ).then((response)=>{
+            console.log('true',response)
+            return true
+        }).catch((e)=>{
+            console.log('error',e)
+            return false
+        })
+    },
+    async GET_ALL_SPRINTS({commit,dispatch}, payload) {
+        return await this.$axios.$post(`http://localhost:8080/board/getSprints`,
+            {
+                // status dönecek ona göre ayır
+                //sprinName, sprintDesc,
             }
         ).then((response)=>{
             console.log('true',response)

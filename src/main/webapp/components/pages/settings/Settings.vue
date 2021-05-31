@@ -67,22 +67,22 @@
                                           @input="$v.form.password.$touch()"/>
                         </v-col>
 
-                        <v-col cols="12" sm="6">
-                            <v-text-field v-model="form.passwordAgain"
+                        <!--<v-col cols="12" sm="6">
+                            <v-text-field v-model="passwordAgain"
                                           :label="$t('verifyPassword')"
                                           outlined dense rounded
                                           type="password" required
                                           prepend-inner-icon="mdi-key-outline"
                                           :error-messages="passwordAgainErrors"
-                                          @input="$v.form.passwordAgain.$touch()"/>
-                        </v-col>
+                                          @input="$v.passwordAgain.$touch()"/>
+                        </v-col> -->
 
                     </v-row>
 
                 </v-form>
 
                 <div class="d-flex justify-center mt-4">
-                    <v-btn rounded depressed color="primary" type="submit" @click.prevent="submit" class="px-16">
+                    <v-btn rounded depressed color="primary" type="submit" @click="submit" class="px-16">
                         {{ $t('save') }}
                     </v-btn>
                 </div>
@@ -108,18 +108,32 @@ export default {
                 email: this.$storage.getCookie('email')?this.$storage.getCookie('email'):null,
                 phone: null,
                 password: null,
-                passwordAgain: null,
-                rememberMe: false,
-            }
+            },
+        }
+    },
+    watch: {
+        '$store.state.profileInfo'(val) {
+            this.form = {...val}
+            this.$nuxt.refresh()
         }
     },
     methods: {
             async submit() {
                 this.$v.form.$touch();
+                if(!this.$v.form.name.$anyError && !this.$v.form.surname.$anyError && !this.$v.form.email.$anyError &&
+                    !this.$v.form.phone.$anyError && !this.$v.form.password.$anyError){
+                    this.$storage.setCookie('email', this.form.email)
+                    await this.$store.dispatch('POST_PROFILE_UPDATE',this.form)
+                }
             }
     },
     created() {
         this.$store.commit('SET_PAGE_TITLE', this.pageTitle)
+        this.$store.dispatch('POST_PROFILE_LOGIN').then(()=>{
+                this.form = {
+                    ...this.$store.state.profileInfo
+                }
+        })
     }
 }
 </script>

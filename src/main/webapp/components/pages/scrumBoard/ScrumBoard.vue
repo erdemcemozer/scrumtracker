@@ -2,27 +2,29 @@
     <v-container fluid>
 
         <v-card flat tile color="transparent">
+            <v-row no-gutters>
+                <v-col cols="8" class="pa-2">
+                    <v-text-field color="transparent"
+                                  class="neumerophism py-1 mt-0 fill-width mr-3"
+                                  v-model="search"
+                                  append-icon="mdi-magnify"
+                                  :label="$t('search')"
+                                  single-line flat rounded
+                                  hide-details/>
+                </v-col>
 
-            <div class="d-flex pa-3">
-                <v-text-field color="transparent"
-                              class="neumerophism py-1 mt-0 fill-width mr-3"
-                              v-model="search"
-                              append-icon="mdi-magnify"
-                              :label="$t('search')"
-                              single-line flat rounded
-                              hide-details/>
-                <v-select
-                    v-model="select"
-                    :hint="`${select.state}, ${select.abbr}`"
-                    :items="items"
-                    item-text="state"
-                    item-value="abbr"
-                    label="Select"
-                    persistent-hint
-                    return-object
-                    single-line
-                ></v-select>
-            </div>
+                <v-col cols="2" class="pa-2">
+                    <v-select
+                        :items="sprints"
+                        label="Sprints"
+                        dense
+                    ></v-select>
+                </v-col>
+
+                <v-col cols="2" class="pa-2">
+                    <add-sprint-dialog/>
+                </v-col>
+            </v-row>
 
 
 
@@ -137,22 +139,17 @@
 <script>
 import draggable from 'vuedraggable'
 import AddTaskDialog from "./AddTaskDialog";
+import AddSprintDialog from "./AddSprintDialog";
 
 export default {
     components: {
         draggable,
-        AddTaskDialog
+        AddTaskDialog,
+        AddSprintDialog
     },
     data() {
         return {
-            select: { state: 'Florida', abbr: 'FL' },
-            items: [
-                { state: 'Florida', abbr: 'FL' },
-                { state: 'Georgia', abbr: 'GA' },
-                { state: 'Nebraska', abbr: 'NE' },
-                { state: 'California', abbr: 'CA' },
-                { state: 'New York', abbr: 'NY' },
-            ],
+            sprints: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             pageTitle: this.$t('scrumBoard'),
             openTasks: [
                 {
