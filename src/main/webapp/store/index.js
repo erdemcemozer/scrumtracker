@@ -341,8 +341,8 @@ export const actions = {
     },
     async GET_SELECTED_ISSUE({commit}, payload) {
         // isim gönder
-        await this.$axios.post(`http://localhost:8080/board/getLastSprintIssues`, {payload}).then((response)=>{
-            //console.log('ssss',response)
+        await this.$axios.post(`http://localhost:8080/board/getLastSprintIssues`, {sprintName: payload}).then((response)=>{
+            console.log('ssss',response)
             commit('SET_SELECTED_ISSUE',response.data)
         }).catch((e)=>{
             console.log('error',e)

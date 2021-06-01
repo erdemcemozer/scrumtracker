@@ -35,17 +35,23 @@
                     </v-col>
 
                     <v-col cols="12">
-                        <v-text-field v-model="form.issueType"
-                                      :label="$t('issueType')+':'"
-                                      outlined dense rounded required
-                                      prepend-inner-icon="mdi-format-list-bulleted-type"/>
+                        <v-select
+                            v-model="form.issueType"
+                            :items="issueTypeItems"
+                            outlined dense rounded
+                            :label="$t('issueType')+':'"
+                            prepend-inner-icon="mdi-format-list-bulleted-type" />
                     </v-col>
 
                     <v-col cols="12">
-                        <v-text-field v-model="form.issueSprintName"
-                                      :label="$t('sprintName')+':'"
-                                      outlined dense rounded required
-                                      prepend-inner-icon="mdi-alpha-n-box-outline"/>
+                        <v-select
+                            v-model="form.issueSprintName"
+                            :items="issueSprintNameItems"
+                            outlined dense rounded
+                            :label="$t('sprintName')+':'"
+                            item-text="sprintName"
+                            item-value="sprintName"
+                            prepend-inner-icon="mdi-alpha-n-box-outline" />
                     </v-col>
 
                     <v-col cols="12">
@@ -116,16 +122,18 @@ export default {
             form: {
                 issueTitle: null,
                 issueDesc: null,
-                issueType: null,
+                issueType: null, //['bug', 'story', 'task', 'feature', 'improvement', 'epic'],
                 issueSprintName: null,
                 issuePriority: null,  // dropdown
                 issueEstimation: null,
-                issueStatus: null, // dropdown -> bug, story, task, feature, improvement, epic
+                issueStatus: null, // ['Done', 'Reopen', 'In Progress', 'In Test', this.$t('minor')],
                 issueOwner: null // databaseden dropdown
             },
-            issueStatusItems: ['bug', 'story', 'task', 'feature', 'improvement', 'epic'],
+            issueStatusItems: ['Done', 'Reopen', 'In Progress', 'In Test', 'Resolved'],
+            issueTypeItems: ['bug', 'story', 'task', 'feature', 'improvement', 'epic'],
             issuePriorityItems: [this.$t('blocker'), this.$t('critical'), this.$t('major'), this.$t('normal'), this.$t('minor')],
-            issueOwnerItems: []
+            issueOwnerItems: [],
+            issueSprintNameItems: []
         }
     },
     methods:{
@@ -187,11 +195,15 @@ export default {
                     this.issueOwnerItems.push(item.name + ' ' + item.surname)
                     //this.issueOwnerItems.push(item.id)
                 }
+
                 // console.log('issue2', this.issueOwnerItems)
             }
         )
+        this.$store.dispatch('GET_ALL_SPRINTS').then(()=>{
+            this.issueSprintNameItems = this.$store.state.allSprints
+        })
+    },
 
-    }
 }
 </script>
 
