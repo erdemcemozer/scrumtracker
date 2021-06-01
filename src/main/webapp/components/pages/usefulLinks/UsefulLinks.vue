@@ -23,14 +23,29 @@
                           class="transparent">
 
                <template #item.name="{item}">
-
                     <v-icon v-text="'mdi-arrow-right-thin-circle-outline'" class="mr-2" v-if="$vuetify.breakpoint.mdAndUp"/>
-
                     <a :href="item.name" target="_blank">
                         {{ item.name }}
                     </a>
                 </template>
+
+                <<template #item.action="{ item }">
+                    <div class="d-flex">
+
+                       <v-tooltip top>
+                            <template #activator="{ on }">
+                                <v-btn icon color="grey" v-on="on" class="ml-3" @click="deleteUsefulLink(item)">
+                                    <v-icon v-text="'mdi-delete-outline'"/>
+                                </v-btn>
+                            </template>
+                            {{ $t('delete') }}
+                        </v-tooltip>
+                    </div>
+                </template>
+
+
             </v-data-table>
+
         </v-card>
     </v-container>
 </template>
@@ -59,6 +74,7 @@ export default {
                     sortable: false,
                     value: 'linkDescription',
                 },
+                {text: null, value: 'action', sortable: false, width: 20},
 
             ],
             desserts: [
@@ -78,7 +94,19 @@ export default {
             this.desserts = val
             this.$nuxt.refresh()
         }
+    },
+    methods: {
+        deleteUsefulLink(item) {
+            this.$store.dispatch('POST_DELETE_USEFUL_LINKS',item.id)
+        }
     }
 }
 </script>
+
+<style lang="css" scoped>
+    a {
+       cursor: pointer;
+    }
+
+</style>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="text-center">
-        <v-dialog v-model="dialog" width="500">
+        <v-dialog v-model="dialog" width="500" @click:outside="outsideClicked">
             <template #activator="{ on, attrs }">
 
                 <v-btn class="neumerophism"
@@ -65,6 +65,14 @@ export default {
             this.$store.dispatch('POST_USEFUL_LINKS_ADD', {link: this.link, description: this.description}).then(()=>{
                 this.$nuxt.refresh()
             })
+
+                this.link= null,
+                this.description= null
+
+        },
+        outsideClicked() {
+            /*this.link= null,
+            this.description= null*/
         }
     }
 }

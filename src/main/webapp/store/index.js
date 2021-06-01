@@ -86,6 +86,12 @@ export const actions = {
             }
         )
     },
+    async POST_DELETE_USEFUL_LINKS({commit,dispatch}, payload) {
+        await this.$axios.post(`http://localhost:8080/usefulLinks/deleteById`, {id: payload}).then((response)=>{
+            dispatch('GET_USEFUL_LINKS', response.data)
+            }
+        )
+    },
 
     async POST_ANNOUNCEMENTS_ADD({commit, dispatch}, payload) {
         //console.log('payload', payload)

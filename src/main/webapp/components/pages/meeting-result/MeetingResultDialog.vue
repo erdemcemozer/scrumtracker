@@ -1,6 +1,6 @@
 <template>
     <div class="text-center">
-        <v-dialog v-model="dialog" width="500" @click:outside="$emit('add-task', false)">
+        <v-dialog v-model="dialog" width="500" @click:outside="outsideClicked">
 
             <v-card class="pa-10">
 
@@ -72,8 +72,19 @@ export default {
 
             this.$emit('add-task', false)
             this.dialog = false
+            this.form = {
+                announcementTitle: null,
+                announcementDescription: null
+            }
 
         },
+        outsideClicked() {
+            this.$emit('add-task', false)
+            /*this.form = {
+                announcementTitle: null,
+                announcementDescription: null
+            }*/
+        }
     },
     watch:{
         open(val){

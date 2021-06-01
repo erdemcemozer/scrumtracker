@@ -163,7 +163,7 @@ export default {
         },
         async deleteResult(arr,task) {
             await this.$store.dispatch('POST_DELETE_ISSUE', task)
-            this.$delete(arr, task)
+            //this.$delete(arr, task)
         },
         changeSelect(select) {
             this.$store.dispatch('GET_SELECTED_ISSUE', select.sprintName).then(()=>{
@@ -234,6 +234,23 @@ export default {
     watch: {
         '$store.state.allSprints'(val) {
             this.items = [...val]
+            this.$nuxt.refresh()
+        },
+
+        '$store.state.issues'(val) {
+            console.log('val',val)
+            this.openTasks = val.filter((obj)=>{
+                return obj.issueStatus === 'Reopen' || obj.issueStatus === 'Open'
+            })
+            this.inProgressTasks = val.filter((obj)=>{
+                return obj.issueStatus === 'In Progress'
+            })
+            this.inTestTasks = val.filter((obj)=>{
+                return obj.issueStatus === 'In Test'
+            })
+            this.doneTasks = val.filter((obj)=>{
+                return obj.issueStatus === 'Done' || obj.issueStatus === 'Resolved'
+            })
             this.$nuxt.refresh()
         },
         select: {

@@ -15,13 +15,13 @@ export const state = () => ({
             content: null,
             children: []
         },
-        {
+        /*{
             name: 'dashBoard',
             icon: 'monitor-dashboard',
             path: 'sections-dash-board',
             content: null,
             children: []
-        },
+        },*/
         {
             name: 'meetingResults',
             icon: 'account-group-outline',

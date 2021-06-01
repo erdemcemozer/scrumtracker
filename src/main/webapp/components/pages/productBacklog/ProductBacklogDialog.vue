@@ -1,6 +1,6 @@
 <template>
     <div class="text-center">
-        <v-dialog v-model="dialog" width="500" @click:outside="$emit('add-task', false)">
+        <v-dialog v-model="dialog" width="500" @click:outside="outsideClicked">
             <template #activator="{ on, attrs }">
 
                 <v-btn class="neumerophism"
@@ -151,8 +151,31 @@ export default {
 
             this.$emit('add-task', false)
             this.dialog = false
+            this.form = {
+                issueTitle: null,
+                issueDesc: null,
+                issueType: null, //['bug', 'story', 'task', 'feature', 'improvement', 'epic'],
+                issueSprintName: null,
+                issuePriority: null,  // dropdown
+                issueEstimation: null,
+                issueStatus: null, // ['Done', 'Reopen', 'In Progress', 'In Test', this.$t('minor')],
+                issueOwner: null // databaseden dropdown
+            }
 
         },
+        outsideClicked() {
+            this.$emit('add-task', false)
+           /* this.form = {
+                issueTitle: null,
+                issueDesc: null,
+                issueType: null, //['bug', 'story', 'task', 'feature', 'improvement', 'epic'],
+                issueSprintName: null,
+                issuePriority: null,  // dropdown
+                issueEstimation: null,
+                issueStatus: null, // ['Done', 'Reopen', 'In Progress', 'In Test', this.$t('minor')],
+                issueOwner: null // databaseden dropdown
+            }*/
+        }
     },
     watch:{
         open(val){
