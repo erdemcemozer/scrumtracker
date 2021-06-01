@@ -37,18 +37,18 @@
                     <v-col cols="12" md="3" class="mb-5">
                         <v-card flat class="transparent" rounded="lg">
 
+                            <v-card-title v-text="$t('openReopen')" class="py-2 white"/>
 
-                                <v-card-title v-text="$t('openReopen')" class="py-2 white"/>
-
-                            <draggable :list="openTasks" group="people" style="min-height: 50px">
+                            <draggable :list="openTasks" group="people" @end="checkTaskStatus($event)" style="min-height: 50px">
                                 <v-hover v-slot="{ hover }" v-for="(task, i) in openTasks" :key="`${task.issueTitle}-${i}`">
                                     <v-card flat class="pa-3 mt-2" :elevation="hover ? 6 : 1">
-                                      <div class="d-flex flex-row justify-space-between">
+
+                                        <div class="d-flex flex-row justify-space-between">
                                           <span class="d-block text-body-1 font-weight-bold mb-1" v-text="task.issueTitle"/>
                                           <v-btn icon class="mt-n2">
                                             <v-icon small color="indigo lighten-4" v-text="'mdi-close'" @click="deleteResult(openTasks,task)"/>
                                           </v-btn>
-                                      </div>
+                                        </div>
 
                                         <span class="d-block text-body-2" v-text="task.issueDesc"/>
 
@@ -62,7 +62,7 @@
                         <v-card flat class="transparent" rounded="lg">
                             <v-card-title v-text="$t('inProgress')" class="white py-2"/>
 
-                            <draggable :list="inProgressTasks" group="people" style="min-height: 50px">
+                            <draggable :list="inProgressTasks" group="people" @change="checkTaskStatus($event, 'In Progress')" style="min-height: 50px">
                                 <v-hover v-slot="{ hover }" v-for="(task, i) in inProgressTasks"
                                          :key="`${task.issueTitle}-${i}`">
                                     <v-card flat class="pa-3 mt-2" :elevation="hover ? 6 : 1">
@@ -148,13 +148,7 @@ export default {
             select: {},
             items: [],
             pageTitle: this.$t('scrumBoard'),
-            openTasks: [
-                /*{
-                    id: 1,
-                    title: 'My first Task Title',
-                    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis neque quia quod.'
-                },*/
-            ],
+            openTasks: [],
             inProgressTasks: [],
             inTestTasks: [],
             doneTasks: [],
@@ -191,6 +185,16 @@ export default {
         },
         dragObj(e) {
             console.log('drag',e)
+        },
+
+        async checkTaskStatus(e, status){
+            if(e.added){
+                const task = {...e.added.element}
+                task.issueStatus = status
+                await this.$store.dispatch('POST_UPDATE_ISSUE', task).then(()=>{
+                    this.$nuxt.refresh()
+                })
+            }
         }
     },
     /*
